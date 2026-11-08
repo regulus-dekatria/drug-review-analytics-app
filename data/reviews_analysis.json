@@ -1,0 +1,2246 @@
+{
+ "run": 2,
+ "generated": "2026-11-08 10:59",
+ "basis": "130,558 distinct reviews",
+ "categories": [
+  "Side Effects and Symptoms",
+  "Switching Medications",
+  "Cost",
+  "Effectiveness: worked",
+  "Effectiveness: did not work",
+  "Dosage"
+ ],
+ "validation": {
+  "vader_accuracy": 53.2,
+  "vader_kappa": 0.218,
+  "theme_coherence": 0.204,
+  "theme_stability": 0.243,
+  "symptom_mentions_negated": 9.4
+ },
+ "views": {
+  "All conditions": {
+   "reviews": 130558,
+   "sentiment": {
+    "positive": 47.9,
+    "neutral": 4.3,
+    "negative": 47.8,
+    "mean_compound": -0.006
+   },
+   "words_vs_score": {
+    "agreement": 53.2,
+    "low_called_positive": 20.9
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 43.3,
+    "Switching Medications": 5.2,
+    "Cost": 6.9,
+    "Effectiveness: worked": 15.0,
+    "Effectiveness: did not work": 4.6,
+    "Dosage": 20.8
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "nausea",
+      "reviews": 7921
+     },
+     {
+      "term": "cramps",
+      "reviews": 6453
+     },
+     {
+      "term": "weight gain",
+      "reviews": 5715
+     },
+     {
+      "term": "headaches",
+      "reviews": 5619
+     },
+     {
+      "term": "tired",
+      "reviews": 4943
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "stopped taking",
+      "reviews": 2106
+     },
+     {
+      "term": "switched to",
+      "reviews": 1935
+     },
+     {
+      "term": "compared to",
+      "reviews": 946
+     },
+     {
+      "term": "went back to",
+      "reviews": 900
+     },
+     {
+      "term": "switched from",
+      "reviews": 442
+     }
+    ],
+    "Cost": [
+     {
+      "term": "insurance",
+      "reviews": 3491
+     },
+     {
+      "term": "generic",
+      "reviews": 1937
+     },
+     {
+      "term": "expensive",
+      "reviews": 1782
+     },
+     {
+      "term": "cost",
+      "reviews": 1548
+     },
+     {
+      "term": "price",
+      "reviews": 949
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "helped",
+      "reviews": 8030
+     },
+     {
+      "term": "effective",
+      "reviews": 4380
+     },
+     {
+      "term": "relief",
+      "reviews": 4016
+     },
+     {
+      "term": "works great",
+      "reviews": 1723
+     },
+     {
+      "term": "life saver",
+      "reviews": 1458
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "didn't work",
+      "reviews": 1235
+     },
+     {
+      "term": "relief",
+      "reviews": 950
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 741
+     },
+     {
+      "term": "helped",
+      "reviews": 678
+     },
+     {
+      "term": "stopped working",
+      "reviews": 600
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "twice a day",
+      "reviews": 2020
+     },
+     {
+      "term": "once a day",
+      "reviews": 1003
+     },
+     {
+      "term": "half a pill",
+      "reviews": 157
+     },
+     {
+      "term": "increased my dose",
+      "reviews": 87
+     },
+     {
+      "term": "upped my dose",
+      "reviews": 83
+     }
+    ]
+   },
+   "other_medication_named": 36.1,
+   "themes_scope": "all reviews",
+   "themes": [
+    {
+     "theme": "anxiety \u00b7 depression \u00b7 life",
+     "share": 18.6
+    },
+    {
+     "theme": "pill \u00b7 birth \u00b7 control",
+     "share": 10.1
+    },
+    {
+     "theme": "migraines \u00b7 migraine \u00b7 pressure",
+     "share": 8.9
+    },
+    {
+     "theme": "pain \u00b7 back \u00b7 knee",
+     "share": 8.2
+    },
+    {
+     "theme": "nausea \u00b7 stomach \u00b7 constipation",
+     "share": 7.9
+    }
+   ],
+   "unassigned": 3.0,
+   "words_low": [
+    "worse",
+    "worst",
+    "bleeding",
+    "horrible",
+    "not",
+    "never",
+    "burning",
+    "terrible",
+    "awful",
+    "stop"
+   ],
+   "words_high": [
+    "years",
+    "works",
+    "love",
+    "life",
+    "great",
+    "best",
+    "amazing",
+    "miracle",
+    "mg",
+    "saved"
+   ]
+  },
+  "Birth Control": {
+   "reviews": 19579,
+   "sentiment": {
+    "positive": 48.3,
+    "neutral": 2.2,
+    "negative": 49.5,
+    "mean_compound": -0.014
+   },
+   "words_vs_score": {
+    "agreement": 53.8,
+    "low_called_positive": 22.9
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 83.1,
+    "Switching Medications": 8.2,
+    "Cost": 6.6,
+    "Effectiveness: worked": 8.8,
+    "Effectiveness: did not work": 1.7,
+    "Dosage": 1.6
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "cramps",
+      "reviews": 4052
+     },
+     {
+      "term": "acne",
+      "reviews": 4011
+     },
+     {
+      "term": "bleeding",
+      "reviews": 3776
+     },
+     {
+      "term": "mood swings",
+      "reviews": 3581
+     },
+     {
+      "term": "spotting",
+      "reviews": 3296
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "switched to",
+      "reviews": 715
+     },
+     {
+      "term": "stopped taking",
+      "reviews": 337
+     },
+     {
+      "term": "switched from",
+      "reviews": 205
+     },
+     {
+      "term": "compared to",
+      "reviews": 179
+     },
+     {
+      "term": "went back to",
+      "reviews": 161
+     }
+    ],
+    "Cost": [
+     {
+      "term": "insurance",
+      "reviews": 660
+     },
+     {
+      "term": "generic",
+      "reviews": 291
+     },
+     {
+      "term": "covered",
+      "reviews": 186
+     },
+     {
+      "term": "cost",
+      "reviews": 180
+     },
+     {
+      "term": "expensive",
+      "reviews": 156
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "effective",
+      "reviews": 897
+     },
+     {
+      "term": "helped",
+      "reviews": 575
+     },
+     {
+      "term": "works great",
+      "reviews": 139
+     },
+     {
+      "term": "relief",
+      "reviews": 83
+     },
+     {
+      "term": "worked wonders",
+      "reviews": 33
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "didn't work",
+      "reviews": 69
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 68
+     },
+     {
+      "term": "helped",
+      "reviews": 56
+     },
+     {
+      "term": "not working",
+      "reviews": 36
+     },
+     {
+      "term": "effective",
+      "reviews": 36
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "twice a day",
+      "reviews": 18
+     },
+     {
+      "term": "once a day",
+      "reviews": 13
+     },
+     {
+      "term": "lowered my dose",
+      "reviews": 1
+     }
+    ]
+   },
+   "other_medication_named": 27.3,
+   "themes_scope": "within this condition",
+   "themes": [
+    {
+     "theme": "pill \u00b7 period \u00b7 month",
+     "share": 49.6
+    },
+    {
+     "theme": "insertion \u00b7 pain \u00b7 iud",
+     "share": 12.6
+    },
+    {
+     "theme": "nexplanon \u00b7 period \u00b7 bleeding",
+     "share": 8.0
+    },
+    {
+     "theme": "mirena \u00b7 insertion \u00b7 cramping",
+     "share": 6.2
+    },
+    {
+     "theme": "implanon \u00b7 period \u00b7 weight",
+     "share": 5.4
+    }
+   ],
+   "unassigned": 1.0,
+   "words_low": [
+    "worst",
+    "anxiety",
+    "depressed",
+    "removed",
+    "depression",
+    "horrible",
+    "constantly",
+    "started",
+    "stop",
+    "life"
+   ],
+   "words_high": [
+    "love",
+    "no",
+    "far",
+    "insertion",
+    "little",
+    "light",
+    "best",
+    "great",
+    "bit",
+    "overall"
+   ]
+  },
+  "Depression": {
+   "reviews": 7201,
+   "sentiment": {
+    "positive": 45.3,
+    "neutral": 3.3,
+    "negative": 51.4,
+    "mean_compound": -0.061
+   },
+   "words_vs_score": {
+    "agreement": 49.5,
+    "low_called_positive": 18.3
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 41.4,
+    "Switching Medications": 6.9,
+    "Cost": 5.8,
+    "Effectiveness: worked": 18.7,
+    "Effectiveness: did not work": 5.8,
+    "Dosage": 40.7
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "nausea",
+      "reviews": 584
+     },
+     {
+      "term": "tired",
+      "reviews": 457
+     },
+     {
+      "term": "insomnia",
+      "reviews": 445
+     },
+     {
+      "term": "weight gain",
+      "reviews": 382
+     },
+     {
+      "term": "headaches",
+      "reviews": 338
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "switched to",
+      "reviews": 156
+     },
+     {
+      "term": "stopped taking",
+      "reviews": 141
+     },
+     {
+      "term": "went back to",
+      "reviews": 65
+     },
+     {
+      "term": "compared to",
+      "reviews": 58
+     },
+     {
+      "term": "switched from",
+      "reviews": 35
+     }
+    ],
+    "Cost": [
+     {
+      "term": "generic",
+      "reviews": 159
+     },
+     {
+      "term": "insurance",
+      "reviews": 135
+     },
+     {
+      "term": "expensive",
+      "reviews": 81
+     },
+     {
+      "term": "cost",
+      "reviews": 66
+     },
+     {
+      "term": "price",
+      "reviews": 52
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "helped",
+      "reviews": 828
+     },
+     {
+      "term": "effective",
+      "reviews": 203
+     },
+     {
+      "term": "relief",
+      "reviews": 123
+     },
+     {
+      "term": "life saver",
+      "reviews": 105
+     },
+     {
+      "term": "works great",
+      "reviews": 73
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "stopped working",
+      "reviews": 108
+     },
+     {
+      "term": "didn't work",
+      "reviews": 82
+     },
+     {
+      "term": "helped",
+      "reviews": 44
+     },
+     {
+      "term": "not working",
+      "reviews": 38
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 37
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "once a day",
+      "reviews": 70
+     },
+     {
+      "term": "twice a day",
+      "reviews": 57
+     },
+     {
+      "term": "upped my dose",
+      "reviews": 19
+     },
+     {
+      "term": "increased my dose",
+      "reviews": 14
+     },
+     {
+      "term": "upped the dose",
+      "reviews": 11
+     }
+    ]
+   },
+   "other_medication_named": 48.9,
+   "themes_scope": "within this condition",
+   "themes": [
+    {
+     "theme": "medication \u00b7 anxiety \u00b7 effexor",
+     "share": 41.5
+    },
+    {
+     "theme": "sertraline \u00b7 sleep \u00b7 anxiety",
+     "share": 13.0
+    },
+    {
+     "theme": "wellbutrin \u00b7 xl \u00b7 bupropion",
+     "share": 7.0
+    },
+    {
+     "theme": "celexa \u00b7 citalopram \u00b7 anxiety",
+     "share": 6.2
+    },
+    {
+     "theme": "pristiq",
+     "share": 5.7
+    }
+   ],
+   "unassigned": 0.7,
+   "words_low": [
+    "worse",
+    "worst",
+    "drug",
+    "not",
+    "horrible",
+    "vomiting",
+    "cold",
+    "heart",
+    "withdrawal",
+    "vision"
+   ],
+   "words_high": [
+    "life",
+    "years",
+    "saved",
+    "happy",
+    "best",
+    "depression",
+    "great",
+    "love",
+    "better",
+    "changed"
+   ]
+  },
+  "Pain": {
+   "reviews": 5317,
+   "sentiment": {
+    "positive": 33.8,
+    "neutral": 4.5,
+    "negative": 61.7,
+    "mean_compound": -0.222
+   },
+   "words_vs_score": {
+    "agreement": 40.7,
+    "low_called_positive": 15.0
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 28.1,
+    "Switching Medications": 3.3,
+    "Cost": 5.8,
+    "Effectiveness: worked": 26.6,
+    "Effectiveness: did not work": 8.2,
+    "Dosage": 28.5
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "headaches",
+      "reviews": 199
+     },
+     {
+      "term": "nausea",
+      "reviews": 196
+     },
+     {
+      "term": "constipation",
+      "reviews": 159
+     },
+     {
+      "term": "headache",
+      "reviews": 156
+     },
+     {
+      "term": "migraine",
+      "reviews": 137
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "switched to",
+      "reviews": 56
+     },
+     {
+      "term": "stopped taking",
+      "reviews": 43
+     },
+     {
+      "term": "compared to",
+      "reviews": 31
+     },
+     {
+      "term": "went back to",
+      "reviews": 15
+     },
+     {
+      "term": "changed to",
+      "reviews": 11
+     }
+    ],
+    "Cost": [
+     {
+      "term": "insurance",
+      "reviews": 115
+     },
+     {
+      "term": "generic",
+      "reviews": 74
+     },
+     {
+      "term": "expensive",
+      "reviews": 72
+     },
+     {
+      "term": "cost",
+      "reviews": 52
+     },
+     {
+      "term": "price",
+      "reviews": 29
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "relief",
+      "reviews": 642
+     },
+     {
+      "term": "helped",
+      "reviews": 384
+     },
+     {
+      "term": "effective",
+      "reviews": 253
+     },
+     {
+      "term": "works great",
+      "reviews": 125
+     },
+     {
+      "term": "life saver",
+      "reviews": 100
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "relief",
+      "reviews": 161
+     },
+     {
+      "term": "helped",
+      "reviews": 49
+     },
+     {
+      "term": "didn't work",
+      "reviews": 45
+     },
+     {
+      "term": "effective",
+      "reviews": 43
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 39
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "twice a day",
+      "reviews": 129
+     },
+     {
+      "term": "once a day",
+      "reviews": 29
+     },
+     {
+      "term": "half a pill",
+      "reviews": 4
+     },
+     {
+      "term": "upped my dose",
+      "reviews": 4
+     },
+     {
+      "term": "increased my dose",
+      "reviews": 3
+     }
+    ]
+   },
+   "other_medication_named": 47.7,
+   "themes_scope": "within this condition",
+   "themes": [
+    {
+     "theme": "back \u00b7 medication \u00b7 medicine",
+     "share": 50.1
+    },
+    {
+     "theme": "opana \u00b7 methadone \u00b7 oxycontin",
+     "share": 14.8
+    },
+    {
+     "theme": "tramadol \u00b7 kidney \u00b7 back",
+     "share": 7.5
+    },
+    {
+     "theme": "lyrica \u00b7 sleep \u00b7 back",
+     "share": 4.9
+    },
+    {
+     "theme": "migraine \u00b7 migraines \u00b7 headaches",
+     "share": 4.2
+    }
+   ],
+   "unassigned": 1.8,
+   "words_low": [
+    "not",
+    "waste",
+    "money",
+    "mylan",
+    "useless",
+    "stick",
+    "skin",
+    "hysingla",
+    "joke",
+    "help"
+   ],
+   "words_high": [
+    "life",
+    "years",
+    "works",
+    "without",
+    "able",
+    "great",
+    "best",
+    "free",
+    "amazing",
+    "miracle"
+   ]
+  },
+  "Anxiety": {
+   "reviews": 5190,
+   "sentiment": {
+    "positive": 46.0,
+    "neutral": 3.3,
+    "negative": 50.7,
+    "mean_compound": -0.051
+   },
+   "words_vs_score": {
+    "agreement": 50.2,
+    "low_called_positive": 18.6
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 33.8,
+    "Switching Medications": 4.7,
+    "Cost": 2.8,
+    "Effectiveness: worked": 22.2,
+    "Effectiveness: did not work": 5.0,
+    "Dosage": 42.4
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "tired",
+      "reviews": 260
+     },
+     {
+      "term": "insomnia",
+      "reviews": 252
+     },
+     {
+      "term": "nausea",
+      "reviews": 205
+     },
+     {
+      "term": "dizziness",
+      "reviews": 163
+     },
+     {
+      "term": "dizzy",
+      "reviews": 163
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "stopped taking",
+      "reviews": 87
+     },
+     {
+      "term": "switched to",
+      "reviews": 63
+     },
+     {
+      "term": "compared to",
+      "reviews": 34
+     },
+     {
+      "term": "went back to",
+      "reviews": 34
+     },
+     {
+      "term": "came off",
+      "reviews": 14
+     }
+    ],
+    "Cost": [
+     {
+      "term": "generic",
+      "reviews": 66
+     },
+     {
+      "term": "insurance",
+      "reviews": 38
+     },
+     {
+      "term": "price",
+      "reviews": 18
+     },
+     {
+      "term": "cost",
+      "reviews": 18
+     },
+     {
+      "term": "expensive",
+      "reviews": 17
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "helped",
+      "reviews": 596
+     },
+     {
+      "term": "effective",
+      "reviews": 191
+     },
+     {
+      "term": "life saver",
+      "reviews": 151
+     },
+     {
+      "term": "relief",
+      "reviews": 140
+     },
+     {
+      "term": "works great",
+      "reviews": 100
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "didn't work",
+      "reviews": 45
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 44
+     },
+     {
+      "term": "stopped working",
+      "reviews": 38
+     },
+     {
+      "term": "helped",
+      "reviews": 36
+     },
+     {
+      "term": "no effect",
+      "reviews": 27
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "twice a day",
+      "reviews": 182
+     },
+     {
+      "term": "once a day",
+      "reviews": 70
+     },
+     {
+      "term": "half a pill",
+      "reviews": 14
+     },
+     {
+      "term": "upped my dose",
+      "reviews": 9
+     },
+     {
+      "term": "increased my dose",
+      "reviews": 7
+     }
+    ]
+   },
+   "other_medication_named": 41.6,
+   "themes_scope": "within this condition",
+   "themes": [
+    {
+     "theme": "panic \u00b7 xanax \u00b7 medication",
+     "share": 61.5
+    },
+    {
+     "theme": "lexapro \u00b7 weeks \u00b7 life",
+     "share": 10.1
+    },
+    {
+     "theme": "buspar \u00b7 buspirone",
+     "share": 5.9
+    },
+    {
+     "theme": "gabapentin \u00b7 pain \u00b7 gad",
+     "share": 4.1
+    },
+    {
+     "theme": "ativan \u00b7 panic \u00b7 attacks",
+     "share": 3.5
+    }
+   ],
+   "unassigned": 0.6,
+   "words_low": [
+    "worse",
+    "not",
+    "withdrawal",
+    "worst",
+    "horrible",
+    "drug",
+    "nightmares",
+    "help",
+    "dizzy",
+    "memory"
+   ],
+   "words_high": [
+    "life",
+    "great",
+    "years",
+    "helps",
+    "saved",
+    "calm",
+    "finally",
+    "love",
+    "best",
+    "works"
+   ]
+  },
+  "Acne": {
+   "reviews": 4567,
+   "sentiment": {
+    "positive": 60.0,
+    "neutral": 3.0,
+    "negative": 37.0,
+    "mean_compound": 0.189
+   },
+   "words_vs_score": {
+    "agreement": 61.7,
+    "low_called_positive": 21.6
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 19.4,
+    "Switching Medications": 6.6,
+    "Cost": 6.9,
+    "Effectiveness: worked": 12.9,
+    "Effectiveness: did not work": 5.0,
+    "Dosage": 13.2
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "nausea",
+      "reviews": 128
+     },
+     {
+      "term": "depression",
+      "reviews": 126
+     },
+     {
+      "term": "mood swings",
+      "reviews": 109
+     },
+     {
+      "term": "headaches",
+      "reviews": 103
+     },
+     {
+      "term": "cramps",
+      "reviews": 86
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "stopped taking",
+      "reviews": 120
+     },
+     {
+      "term": "went back to",
+      "reviews": 55
+     },
+     {
+      "term": "switched to",
+      "reviews": 51
+     },
+     {
+      "term": "compared to",
+      "reviews": 44
+     },
+     {
+      "term": "changed to",
+      "reviews": 12
+     }
+    ],
+    "Cost": [
+     {
+      "term": "covered",
+      "reviews": 83
+     },
+     {
+      "term": "expensive",
+      "reviews": 80
+     },
+     {
+      "term": "insurance",
+      "reviews": 76
+     },
+     {
+      "term": "generic",
+      "reviews": 41
+     },
+     {
+      "term": "price",
+      "reviews": 32
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "helped",
+      "reviews": 283
+     },
+     {
+      "term": "effective",
+      "reviews": 107
+     },
+     {
+      "term": "worked wonders",
+      "reviews": 72
+     },
+     {
+      "term": "really works",
+      "reviews": 46
+     },
+     {
+      "term": "life saver",
+      "reviews": 46
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "didn't work",
+      "reviews": 62
+     },
+     {
+      "term": "helped",
+      "reviews": 46
+     },
+     {
+      "term": "stopped working",
+      "reviews": 28
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 25
+     },
+     {
+      "term": "effective",
+      "reviews": 20
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "twice a day",
+      "reviews": 146
+     },
+     {
+      "term": "once a day",
+      "reviews": 106
+     },
+     {
+      "term": "upped my dose",
+      "reviews": 7
+     },
+     {
+      "term": "half a pill",
+      "reviews": 3
+     },
+     {
+      "term": "upped the dose",
+      "reviews": 2
+     }
+    ]
+   },
+   "other_medication_named": 37.7,
+   "themes_scope": "within this condition",
+   "themes": [
+    {
+     "theme": "pill \u00b7 skin \u00b7 control",
+     "share": 25.8
+    },
+    {
+     "theme": "accutane \u00b7 skin \u00b7 dry",
+     "share": 21.7
+    },
+    {
+     "theme": "skin \u00b7 using \u00b7 face",
+     "share": 19.2
+    },
+    {
+     "theme": "epiduo \u00b7 skin \u00b7 using",
+     "share": 8.2
+    },
+    {
+     "theme": "doxycycline \u00b7 doxy \u00b7 skin",
+     "share": 6.9
+    }
+   ],
+   "unassigned": 0.4,
+   "words_low": [
+    "pill",
+    "worse",
+    "not",
+    "worst",
+    "horrible",
+    "reaction",
+    "ruined",
+    "caused",
+    "gotten",
+    "never"
+   ],
+   "words_high": [
+    "tried",
+    "amazing",
+    "love",
+    "works",
+    "years",
+    "use",
+    "accutane",
+    "results",
+    "highly",
+    "retin"
+   ]
+  },
+  "Insomnia": {
+   "reviews": 3473,
+   "sentiment": {
+    "positive": 56.3,
+    "neutral": 6.1,
+    "negative": 37.6,
+    "mean_compound": 0.13
+   },
+   "words_vs_score": {
+    "agreement": 57.8,
+    "low_called_positive": 27.7
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 25.1,
+    "Switching Medications": 3.2,
+    "Cost": 6.8,
+    "Effectiveness: worked": 15.6,
+    "Effectiveness: did not work": 8.8,
+    "Dosage": 43.2
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "anxiety",
+      "reviews": 375
+     },
+     {
+      "term": "depression",
+      "reviews": 240
+     },
+     {
+      "term": "weight gain",
+      "reviews": 86
+     },
+     {
+      "term": "headache",
+      "reviews": 84
+     },
+     {
+      "term": "dry mouth",
+      "reviews": 71
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "stopped taking",
+      "reviews": 34
+     },
+     {
+      "term": "went back to",
+      "reviews": 31
+     },
+     {
+      "term": "switched to",
+      "reviews": 23
+     },
+     {
+      "term": "compared to",
+      "reviews": 15
+     },
+     {
+      "term": "moved to",
+      "reviews": 5
+     }
+    ],
+    "Cost": [
+     {
+      "term": "insurance",
+      "reviews": 87
+     },
+     {
+      "term": "generic",
+      "reviews": 84
+     },
+     {
+      "term": "expensive",
+      "reviews": 46
+     },
+     {
+      "term": "cost",
+      "reviews": 28
+     },
+     {
+      "term": "price",
+      "reviews": 20
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "helped",
+      "reviews": 180
+     },
+     {
+      "term": "effective",
+      "reviews": 137
+     },
+     {
+      "term": "works great",
+      "reviews": 114
+     },
+     {
+      "term": "life saver",
+      "reviews": 59
+     },
+     {
+      "term": "worked wonders",
+      "reviews": 29
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "didn't work",
+      "reviews": 69
+     },
+     {
+      "term": "stopped working",
+      "reviews": 50
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 48
+     },
+     {
+      "term": "no effect",
+      "reviews": 39
+     },
+     {
+      "term": "useless",
+      "reviews": 29
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "half a pill",
+      "reviews": 14
+     },
+     {
+      "term": "twice a day",
+      "reviews": 5
+     },
+     {
+      "term": "upped my dose",
+      "reviews": 4
+     },
+     {
+      "term": "upped the dose",
+      "reviews": 2
+     },
+     {
+      "term": "increased my dose",
+      "reviews": 1
+     }
+    ]
+   },
+   "other_medication_named": 41.8,
+   "themes_scope": "all reviews",
+   "themes": [
+    {
+     "theme": "sleep \u00b7 ambien \u00b7 night",
+     "share": 76.8
+    },
+    {
+     "theme": "sleep \u00b7 asleep \u00b7 helps",
+     "share": 7.4
+    },
+    {
+     "theme": "anxiety \u00b7 depression \u00b7 life",
+     "share": 7.3
+    },
+    {
+     "theme": "migraines \u00b7 migraine \u00b7 pressure",
+     "share": 2.7
+    },
+    {
+     "theme": "works \u00b7 great \u00b7 worked",
+     "share": 1.8
+    }
+   ],
+   "unassigned": 1.4,
+   "words_low": [
+    "not",
+    "felt",
+    "belsomra",
+    "horrible",
+    "awake",
+    "worst",
+    "headache",
+    "nothing",
+    "wide",
+    "drug"
+   ],
+   "words_high": [
+    "years",
+    "works",
+    "wake",
+    "life",
+    "love",
+    "great",
+    "best",
+    "sleep",
+    "refreshed",
+    "helps"
+   ]
+  },
+  "Bipolar Disorder": {
+   "reviews": 3330,
+   "sentiment": {
+    "positive": 50.2,
+    "neutral": 4.1,
+    "negative": 45.8,
+    "mean_compound": 0.037
+   },
+   "words_vs_score": {
+    "agreement": 53.6,
+    "low_called_positive": 20.8
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 34.2,
+    "Switching Medications": 5.8,
+    "Cost": 5.5,
+    "Effectiveness: worked": 17.2,
+    "Effectiveness: did not work": 4.1,
+    "Dosage": 36.8
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "weight gain",
+      "reviews": 313
+     },
+     {
+      "term": "tired",
+      "reviews": 156
+     },
+     {
+      "term": "insomnia",
+      "reviews": 128
+     },
+     {
+      "term": "nausea",
+      "reviews": 106
+     },
+     {
+      "term": "sleepy",
+      "reviews": 90
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "stopped taking",
+      "reviews": 78
+     },
+     {
+      "term": "switched to",
+      "reviews": 42
+     },
+     {
+      "term": "compared to",
+      "reviews": 23
+     },
+     {
+      "term": "went back to",
+      "reviews": 20
+     },
+     {
+      "term": "came off",
+      "reviews": 14
+     }
+    ],
+    "Cost": [
+     {
+      "term": "insurance",
+      "reviews": 64
+     },
+     {
+      "term": "generic",
+      "reviews": 43
+     },
+     {
+      "term": "expensive",
+      "reviews": 40
+     },
+     {
+      "term": "cost",
+      "reviews": 25
+     },
+     {
+      "term": "price",
+      "reviews": 24
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "helped",
+      "reviews": 327
+     },
+     {
+      "term": "effective",
+      "reviews": 107
+     },
+     {
+      "term": "life saver",
+      "reviews": 82
+     },
+     {
+      "term": "works great",
+      "reviews": 29
+     },
+     {
+      "term": "relief",
+      "reviews": 26
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "didn't work",
+      "reviews": 35
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 23
+     },
+     {
+      "term": "stopped working",
+      "reviews": 17
+     },
+     {
+      "term": "effective",
+      "reviews": 15
+     },
+     {
+      "term": "helped",
+      "reviews": 14
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "twice a day",
+      "reviews": 70
+     },
+     {
+      "term": "once a day",
+      "reviews": 26
+     },
+     {
+      "term": "increased my dose",
+      "reviews": 5
+     },
+     {
+      "term": "half a pill",
+      "reviews": 3
+     },
+     {
+      "term": "upped the dose",
+      "reviews": 3
+     }
+    ]
+   },
+   "other_medication_named": 46.3,
+   "themes_scope": "all reviews",
+   "themes": [
+    {
+     "theme": "anxiety \u00b7 depression \u00b7 life",
+     "share": 76.8
+    },
+    {
+     "theme": "migraines \u00b7 migraine \u00b7 pressure",
+     "share": 6.0
+    },
+    {
+     "theme": "sleep \u00b7 ambien \u00b7 night",
+     "share": 3.9
+    },
+    {
+     "theme": "lbs \u00b7 lost \u00b7 weight",
+     "share": 3.7
+    },
+    {
+     "theme": "sleep \u00b7 asleep \u00b7 helps",
+     "share": 1.7
+    }
+   ],
+   "unassigned": 2.6,
+   "words_low": [
+    "worse",
+    "worst",
+    "drug",
+    "not",
+    "developed",
+    "caused",
+    "gained",
+    "weeks",
+    "muscle",
+    "legs"
+   ],
+   "words_high": [
+    "life",
+    "lamictal",
+    "years",
+    "best",
+    "saved",
+    "mg",
+    "great",
+    "miracle",
+    "helps",
+    "stable"
+   ]
+  },
+  "Weight Loss": {
+   "reviews": 3120,
+   "sentiment": {
+    "positive": 63.4,
+    "neutral": 3.3,
+    "negative": 33.3,
+    "mean_compound": 0.24
+   },
+   "words_vs_score": {
+    "agreement": 59.8,
+    "low_called_positive": 34.2
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 46.2,
+    "Switching Medications": 3.6,
+    "Cost": 8.9,
+    "Effectiveness: worked": 7.3,
+    "Effectiveness: did not work": 2.5,
+    "Dosage": 13.2
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "dry mouth",
+      "reviews": 623
+     },
+     {
+      "term": "nausea",
+      "reviews": 201
+     },
+     {
+      "term": "headaches",
+      "reviews": 193
+     },
+     {
+      "term": "headache",
+      "reviews": 176
+     },
+     {
+      "term": "constipation",
+      "reviews": 167
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "stopped taking",
+      "reviews": 50
+     },
+     {
+      "term": "went back to",
+      "reviews": 24
+     },
+     {
+      "term": "came off",
+      "reviews": 14
+     },
+     {
+      "term": "compared to",
+      "reviews": 10
+     },
+     {
+      "term": "switched to",
+      "reviews": 8
+     }
+    ],
+    "Cost": [
+     {
+      "term": "insurance",
+      "reviews": 135
+     },
+     {
+      "term": "cost",
+      "reviews": 71
+     },
+     {
+      "term": "expensive",
+      "reviews": 42
+     },
+     {
+      "term": "coupon",
+      "reviews": 31
+     },
+     {
+      "term": "covered",
+      "reviews": 27
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "helped",
+      "reviews": 133
+     },
+     {
+      "term": "effective",
+      "reviews": 36
+     },
+     {
+      "term": "really works",
+      "reviews": 26
+     },
+     {
+      "term": "works great",
+      "reviews": 24
+     },
+     {
+      "term": "life saver",
+      "reviews": 8
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "not working",
+      "reviews": 13
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 12
+     },
+     {
+      "term": "didn't work",
+      "reviews": 10
+     },
+     {
+      "term": "helped",
+      "reviews": 10
+     },
+     {
+      "term": "waste of money",
+      "reviews": 9
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "half a pill",
+      "reviews": 34
+     },
+     {
+      "term": "twice a day",
+      "reviews": 25
+     },
+     {
+      "term": "once a day",
+      "reviews": 22
+     },
+     {
+      "term": "increased my dose",
+      "reviews": 6
+     },
+     {
+      "term": "upped my dose",
+      "reviews": 2
+     }
+    ]
+   },
+   "other_medication_named": 14.5,
+   "themes_scope": "all reviews",
+   "themes": [
+    {
+     "theme": "lbs \u00b7 lost \u00b7 weight",
+     "share": 93.8
+    },
+    {
+     "theme": "migraines \u00b7 migraine \u00b7 pressure",
+     "share": 1.8
+    },
+    {
+     "theme": "nausea \u00b7 stomach \u00b7 constipation",
+     "share": 1.2
+    },
+    {
+     "theme": "anxiety \u00b7 depression \u00b7 life",
+     "share": 1.0
+    },
+    {
+     "theme": "works \u00b7 great \u00b7 worked",
+     "share": 0.6
+    }
+   ],
+   "unassigned": 1.4,
+   "words_low": [
+    "not",
+    "disappointed",
+    "contrave",
+    "horrible",
+    "waste",
+    "pain",
+    "heart",
+    "money",
+    "worse",
+    "drug"
+   ],
+   "words_high": [
+    "lbs",
+    "weighed",
+    "water",
+    "love",
+    "goal",
+    "pounds",
+    "exercise",
+    "drink",
+    "phentermine",
+    "adipex"
+   ]
+  },
+  "Obesity": {
+   "reviews": 2773,
+   "sentiment": {
+    "positive": 59.5,
+    "neutral": 3.9,
+    "negative": 36.7,
+    "mean_compound": 0.186
+   },
+   "words_vs_score": {
+    "agreement": 56.8,
+    "low_called_positive": 30.9
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 47.0,
+    "Switching Medications": 2.9,
+    "Cost": 10.2,
+    "Effectiveness: worked": 8.3,
+    "Effectiveness: did not work": 2.9,
+    "Dosage": 13.5
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "nausea",
+      "reviews": 392
+     },
+     {
+      "term": "dry mouth",
+      "reviews": 257
+     },
+     {
+      "term": "constipation",
+      "reviews": 213
+     },
+     {
+      "term": "headache",
+      "reviews": 168
+     },
+     {
+      "term": "headaches",
+      "reviews": 158
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "stopped taking",
+      "reviews": 40
+     },
+     {
+      "term": "went back to",
+      "reviews": 18
+     },
+     {
+      "term": "came off",
+      "reviews": 8
+     },
+     {
+      "term": "switched to",
+      "reviews": 6
+     },
+     {
+      "term": "compared to",
+      "reviews": 5
+     }
+    ],
+    "Cost": [
+     {
+      "term": "insurance",
+      "reviews": 148
+     },
+     {
+      "term": "cost",
+      "reviews": 64
+     },
+     {
+      "term": "expensive",
+      "reviews": 61
+     },
+     {
+      "term": "covered",
+      "reviews": 37
+     },
+     {
+      "term": "price",
+      "reviews": 32
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "helped",
+      "reviews": 144
+     },
+     {
+      "term": "effective",
+      "reviews": 49
+     },
+     {
+      "term": "really works",
+      "reviews": 16
+     },
+     {
+      "term": "works great",
+      "reviews": 13
+     },
+     {
+      "term": "relief",
+      "reviews": 6
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "didn't work",
+      "reviews": 20
+     },
+     {
+      "term": "helped",
+      "reviews": 15
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 12
+     },
+     {
+      "term": "not working",
+      "reviews": 11
+     },
+     {
+      "term": "effective",
+      "reviews": 8
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "twice a day",
+      "reviews": 35
+     },
+     {
+      "term": "once a day",
+      "reviews": 18
+     },
+     {
+      "term": "half a pill",
+      "reviews": 10
+     },
+     {
+      "term": "upped the dose",
+      "reviews": 6
+     },
+     {
+      "term": "increased my dose",
+      "reviews": 3
+     }
+    ]
+   },
+   "other_medication_named": 23.9,
+   "themes_scope": "all reviews",
+   "themes": [
+    {
+     "theme": "lbs \u00b7 lost \u00b7 weight",
+     "share": 88.3
+    },
+    {
+     "theme": "migraines \u00b7 migraine \u00b7 pressure",
+     "share": 3.8
+    },
+    {
+     "theme": "nausea \u00b7 stomach \u00b7 constipation",
+     "share": 2.5
+    },
+    {
+     "theme": "anxiety \u00b7 depression \u00b7 life",
+     "share": 1.7
+    },
+    {
+     "theme": "works \u00b7 great \u00b7 worked",
+     "share": 0.9
+    }
+   ],
+   "unassigned": 2.2,
+   "words_low": [
+    "not",
+    "vomiting",
+    "money",
+    "disappointed",
+    "felt",
+    "thought",
+    "work",
+    "sick",
+    "worst",
+    "diarrhea"
+   ],
+   "words_high": [
+    "lbs",
+    "eat",
+    "pounds",
+    "food",
+    "far",
+    "goal",
+    "weighed",
+    "drink",
+    "love",
+    "happy"
+   ]
+  },
+  "Vaginal Yeast Infection": {
+   "reviews": 2651,
+   "sentiment": {
+    "positive": 37.9,
+    "neutral": 2.2,
+    "negative": 59.9,
+    "mean_compound": -0.19
+   },
+   "words_vs_score": {
+    "agreement": 60.8,
+    "low_called_positive": 21.8
+   },
+   "watchlist": {
+    "Side Effects and Symptoms": 6.8,
+    "Switching Medications": 1.7,
+    "Cost": 3.9,
+    "Effectiveness: worked": 15.6,
+    "Effectiveness: did not work": 3.8,
+    "Dosage": 2.2
+   },
+   "watchlist_top_terms": {
+    "Side Effects and Symptoms": [
+     {
+      "term": "can't sleep",
+      "reviews": 36
+     },
+     {
+      "term": "rash",
+      "reviews": 21
+     },
+     {
+      "term": "bleeding",
+      "reviews": 21
+     },
+     {
+      "term": "cramps",
+      "reviews": 16
+     },
+     {
+      "term": "nausea",
+      "reviews": 15
+     }
+    ],
+    "Switching Medications": [
+     {
+      "term": "compared to",
+      "reviews": 21
+     },
+     {
+      "term": "went back to",
+      "reviews": 13
+     },
+     {
+      "term": "switched to",
+      "reviews": 6
+     },
+     {
+      "term": "stopped taking",
+      "reviews": 2
+     },
+     {
+      "term": "changed to",
+      "reviews": 1
+     }
+    ],
+    "Cost": [
+     {
+      "term": "generic",
+      "reviews": 62
+     },
+     {
+      "term": "insurance",
+      "reviews": 13
+     },
+     {
+      "term": "expensive",
+      "reviews": 12
+     },
+     {
+      "term": "cost",
+      "reviews": 7
+     },
+     {
+      "term": "afford",
+      "reviews": 5
+     }
+    ],
+    "Effectiveness: worked": [
+     {
+      "term": "relief",
+      "reviews": 274
+     },
+     {
+      "term": "helped",
+      "reviews": 85
+     },
+     {
+      "term": "effective",
+      "reviews": 32
+     },
+     {
+      "term": "works great",
+      "reviews": 14
+     },
+     {
+      "term": "really works",
+      "reviews": 9
+     }
+    ],
+    "Effectiveness: did not work": [
+     {
+      "term": "didn't work",
+      "reviews": 31
+     },
+     {
+      "term": "relief",
+      "reviews": 31
+     },
+     {
+      "term": "waste of money",
+      "reviews": 14
+     },
+     {
+      "term": "doesn't work",
+      "reviews": 11
+     },
+     {
+      "term": "helped",
+      "reviews": 8
+     }
+    ],
+    "Dosage": [
+     {
+      "term": "once a day",
+      "reviews": 3
+     },
+     {
+      "term": "twice a day",
+      "reviews": 1
+     }
+    ]
+   },
+   "other_medication_named": 13.9,
+   "themes_scope": "all reviews",
+   "themes": [
+    {
+     "theme": "burning \u00b7 itching \u00b7 yeast",
+     "share": 93.5
+    },
+    {
+     "theme": "nausea \u00b7 stomach \u00b7 constipation",
+     "share": 2.2
+    },
+    {
+     "theme": "works \u00b7 great \u00b7 worked",
+     "share": 0.9
+    },
+    {
+     "theme": "migraines \u00b7 migraine \u00b7 pressure",
+     "share": 0.7
+    },
+    {
+     "theme": "cough \u00b7 infection \u00b7 sinus",
+     "share": 0.5
+    }
+   ],
+   "unassigned": 1.0,
+   "words_low": [
+    "never",
+    "vagina",
+    "worse",
+    "worst",
+    "wish",
+    "pain",
+    "horrible",
+    "buy",
+    "literally",
+    "ice"
+   ],
+   "words_high": [
+    "no",
+    "works",
+    "discharge",
+    "great",
+    "worked",
+    "gone",
+    "yeast",
+    "little",
+    "cleared",
+    "symptoms"
+   ]
+  }
+ }
+}

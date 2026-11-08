@@ -1,0 +1,31 @@
+{
+  "run": 2,
+  "created": "2026-11-08T15:54:26",
+  "versions": {
+    "python": "3.13.16",
+    "pandas": "2.2.3",
+    "numpy": "2.4.6",
+    "scikit-learn": "1.6.1",
+    "lightgbm": "4.6.0",
+    "joblib": "1.6.0",
+    "scipy": "1.16.3",
+    "torch": "2.14.1+cu130",
+    "transformers": "5.22.1",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.31.1"
+  },
+  "objective1_served": "DistilBERT (compressed)",
+  "objective2_served": "Structured only",
+  "files": {
+    "tfidf_vectoriser.joblib": 0.98,
+    "objective1_fallback_model.joblib": 1.87,
+    "objective2_lightgbm.txt": 1.47,
+    "preprocessing.json": 0.01,
+    "categories.json": 0.06,
+    "metrics.json": 0.0,
+    "distilbert_onnx/model_int8.onnx": 67.36,
+    "distilbert_onnx/tokenizer_config.json": 0.0,
+    "distilbert_onnx/tokenizer.json": 0.71
+  },
+  "note": "Load with the same scikit-learn, LightGBM and ONNX Runtime versions as listed in versions."
+}

@@ -1,0 +1,85 @@
+category,term,reviews,kept
+Side Effects and Symptoms,weight gain,5715,True
+Side Effects and Symptoms,gained weight,976,True
+Side Effects and Symptoms,nausea,7921,True
+Side Effects and Symptoms,nauseous,2697,True
+Side Effects and Symptoms,vomiting,1715,True
+Side Effects and Symptoms,headache,3395,True
+Side Effects and Symptoms,headaches,5619,True
+Side Effects and Symptoms,migraine,832,True
+Side Effects and Symptoms,dizziness,2447,True
+Side Effects and Symptoms,dizzy,2446,True
+Side Effects and Symptoms,drowsy,951,True
+Side Effects and Symptoms,drowsiness,829,True
+Side Effects and Symptoms,fatigue,2241,True
+Side Effects and Symptoms,tired,4943,True
+Side Effects and Symptoms,sleepy,1559,True
+Side Effects and Symptoms,insomnia,2549,True
+Side Effects and Symptoms,can't sleep,426,True
+Side Effects and Symptoms,mood swings,4707,True
+Side Effects and Symptoms,irritability,475,True
+Side Effects and Symptoms,anxiety,4570,True
+Side Effects and Symptoms,depression,4104,True
+Side Effects and Symptoms,acne,4847,True
+Side Effects and Symptoms,hair loss,786,True
+Side Effects and Symptoms,rash,1115,True
+Side Effects and Symptoms,itching,1231,True
+Side Effects and Symptoms,dry mouth,2459,True
+Side Effects and Symptoms,sweating,1292,True
+Side Effects and Symptoms,constipation,1542,True
+Side Effects and Symptoms,diarrhea,2873,True
+Side Effects and Symptoms,bloating,1287,True
+Side Effects and Symptoms,cramps,6453,True
+Side Effects and Symptoms,cramping,3388,True
+Side Effects and Symptoms,spotting,3731,True
+Side Effects and Symptoms,bleeding,4813,True
+Side Effects and Symptoms,low libido,108,True
+Side Effects and Symptoms,sex drive,3785,True
+Side Effects and Symptoms,palpitations,538,True
+Side Effects and Symptoms,tremors,394,True
+Side Effects and Symptoms,blurred vision,439,True
+Switching Medications,switched to,1935,True
+Switching Medications,switched from,442,True
+Switching Medications,changed to,287,True
+Switching Medications,moved to,168,True
+Switching Medications,came off,244,True
+Switching Medications,stopped taking,2106,True
+Switching Medications,went back to,900,True
+Switching Medications,compared to,946,True
+Cost,expensive,1782,True
+Cost,cost,1548,True
+Cost,price,949,True
+Cost,afford,566,True
+Cost,affordable,141,True
+Cost,out of pocket,238,True
+Cost,insurance,3491,True
+Cost,covered,823,True
+Cost,coverage,192,True
+Cost,copay,224,True
+Cost,prior authorization,21,True
+Cost,coupon,315,True
+Cost,discount card,116,True
+Cost,generic,1937,True
+Effectiveness: worked,works great,1725,True
+Effectiveness: worked,really works,498,True
+Effectiveness: worked,worked wonders,677,True
+Effectiveness: worked,life saver,1461,True
+Effectiveness: worked,helped,8708,True
+Effectiveness: worked,relief,4966,True
+Effectiveness: worked,effective,4927,True
+Effectiveness: did not work,didn't work,1235,True
+Effectiveness: did not work,doesn't work,741,True
+Effectiveness: did not work,stopped working,600,True
+Effectiveness: did not work,not working,460,True
+Effectiveness: did not work,no effect,392,True
+Effectiveness: did not work,no difference,162,True
+Effectiveness: did not work,useless,328,True
+Effectiveness: did not work,waste of money,146,True
+Dosage,increased my dose,87,True
+Dosage,upped the dose,68,True
+Dosage,upped my dose,83,True
+Dosage,lowered my dose,26,True
+Dosage,decreased my dose,7,False
+Dosage,half a pill,157,True
+Dosage,once a day,1003,True
+Dosage,twice a day,2020,True

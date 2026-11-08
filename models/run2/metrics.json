@@ -1,0 +1,177 @@
+{
+  "run": 2,
+  "test_years": "2016-2017",
+  "train_years": "2008-2015",
+  "objective1": {
+    "test": {
+      "Baseline (always High)": {
+        "accuracy": 0.502151,
+        "balanced accuracy": 0.333333,
+        "macro F1": 0.222859,
+        "recall Low": 0.0,
+        "precision Low": 0.0,
+        "severe error rate": 0.318978
+      },
+      "TF-IDF + LR": {
+        "accuracy": 0.680241,
+        "balanced accuracy": 0.640421,
+        "macro F1": 0.632446,
+        "recall Low": 0.739704,
+        "precision Low": 0.708819,
+        "severe error rate": 0.073319
+      },
+      "Embeddings + LR": {
+        "accuracy": 0.591139,
+        "balanced accuracy": 0.568689,
+        "macro F1": 0.556207,
+        "recall Low": 0.664379,
+        "precision Low": 0.612671,
+        "severe error rate": 0.126304
+      },
+      "Ordinal TF-IDF": {
+        "accuracy": 0.66699,
+        "balanced accuracy": 0.619828,
+        "macro F1": 0.609387,
+        "recall Low": 0.802734,
+        "precision Low": 0.666353,
+        "severe error rate": 0.075013
+      },
+      "DistilBERT": {
+        "accuracy": 0.761442,
+        "balanced accuracy": 0.727151,
+        "macro F1": 0.7171,
+        "recall Low": 0.79384,
+        "precision Low": 0.815751,
+        "severe error rate": 0.027492
+      }
+    },
+    "train": {
+      "TF-IDF + LR": {
+        "accuracy": 0.810533,
+        "balanced accuracy": 0.81804,
+        "macro F1": 0.766209,
+        "recall Low": 0.884137,
+        "precision Low": 0.69122,
+        "severe error rate": 0.044843
+      },
+      "Embeddings + LR": {
+        "accuracy": 0.614628,
+        "balanced accuracy": 0.593233,
+        "macro F1": 0.543503,
+        "recall Low": 0.650847,
+        "precision Low": 0.42243,
+        "severe error rate": 0.104911
+      },
+      "Ordinal TF-IDF": {
+        "accuracy": 0.7327,
+        "balanced accuracy": 0.703894,
+        "macro F1": 0.651202,
+        "recall Low": 0.846588,
+        "precision Low": 0.541111,
+        "severe error rate": 0.053732
+      },
+      "DistilBERT": {
+        "accuracy": 0.86545,
+        "balanced accuracy": 0.863022,
+        "macro F1": 0.83028,
+        "recall Low": 0.918381,
+        "precision Low": 0.850429,
+        "severe error rate": 0.0073
+      }
+    },
+    "served": "DistilBERT (compressed)",
+    "fallback": "TF-IDF + LR",
+    "C": 0.5,
+    "ordinal_cutoffs": [
+      0.8,
+      0.7
+    ],
+    "capture_rate": {
+      "10%": 0.3002,
+      "20%": 0.567,
+      "30%": 0.7764
+    },
+    "random_split": {
+      "accuracy": 0.7008,
+      "balanced accuracy": 0.6537,
+      "macro F1": 0.6363,
+      "recall Low": 0.717,
+      "precision Low": 0.637,
+      "severe error rate": 0.0636
+    },
+    "baseline_high_share_test": 50.2,
+    "distilbert": "3 passes; final model trained on 77,961 reviews; 37.5 minutes in total",
+    "compressed": "67 MB; balanced accuracy 71.9% on 5,000 test reviews (-0.62 points against the full model); 119 ms per message"
+  },
+  "objective2": {
+    "test": {
+      "Baseline (never helpful)": {
+        "ROC AUC": 0.5,
+        "average precision": 0.247316,
+        "balanced accuracy": 0.5,
+        "precision top 10%": 0.247316,
+        "precision top 25%": 0.247316
+      },
+      "Structured only": {
+        "ROC AUC": 0.854981,
+        "average precision": 0.661514,
+        "balanced accuracy": 0.750956,
+        "precision top 10%": 0.765423,
+        "precision top 25%": 0.623258
+      },
+      "Structured + text": {
+        "ROC AUC": 0.855403,
+        "average precision": 0.662982,
+        "balanced accuracy": 0.750598,
+        "precision top 10%": 0.768088,
+        "precision top 25%": 0.622344
+      },
+      "Structured + embeddings": {
+        "ROC AUC": 0.857991,
+        "average precision": 0.668459,
+        "balanced accuracy": 0.753461,
+        "precision top 10%": 0.775514,
+        "precision top 25%": 0.626304
+      },
+      "Text only (TF-IDF + LR)": {
+        "ROC AUC": 0.802682,
+        "average precision": 0.549138,
+        "balanced accuracy": 0.694345,
+        "precision top 10%": 0.639947,
+        "precision top 25%": 0.537964
+      }
+    },
+    "train": {
+      "Structured only": {
+        "ROC AUC": 0.898117,
+        "average precision": 0.764996,
+        "balanced accuracy": 0.793373,
+        "precision top 10%": 0.868522,
+        "precision top 25%": 0.690764
+      },
+      "Structured + text": {
+        "ROC AUC": 0.907612,
+        "average precision": 0.791041,
+        "balanced accuracy": 0.808166,
+        "precision top 10%": 0.89687,
+        "precision top 25%": 0.712724
+      },
+      "Structured + embeddings": {
+        "ROC AUC": 0.925893,
+        "average precision": 0.830203,
+        "balanced accuracy": 0.827571,
+        "precision top 10%": 0.935736,
+        "precision top 25%": 0.742124
+      }
+    },
+    "served": "Structured only",
+    "text_gain_auc": 0.0004,
+    "base_rate_test": 0.2473,
+    "gain_share": {
+      "Rating": 8.47,
+      "Length": 9.31,
+      "Condition": 40.18,
+      "Medication": 42.03
+    }
+  }
+}
