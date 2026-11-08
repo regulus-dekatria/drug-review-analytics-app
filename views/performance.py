@@ -5,8 +5,8 @@ import streamlit as st
 
 from core import AQUA, BLUE, CYAN, INK, MUTED, NAVY, footer, metrics, training_log
 
-st.title("Model performance")
-st.write("Every model learned from reviews posted from 2008 to 2015 and was tested once on 52,524 reviews from 2016 "
+from dash import hero
+hero("Models · Model performance", "Model performance", "Every model learned from reviews posted from 2008 to 2015 and was tested once on 52,524 reviews from 2016 "
          "and 2017 that it never saw. Testing on later years copies real use: trained on the past, applied to new messages.")
 
 m = metrics()

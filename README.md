@@ -8,9 +8,13 @@ Analytics Techniques and Tools course at Jose Rizal University on the UCI Drug R
 
 | Page | What it does |
 |---|---|
+| Overview | Headline figures and four business questions |
+| Volume Analysis, Average Ratings, Rating Dispersion, Rankings | The descriptive dashboard from the prelim and midterm, filtered live by condition, medication and year |
+| Predictive Insights | The rating model's calls on the 2016-2017 test reviews, by condition and medication |
+| Data dictionary | Source and derived fields |
 | Classify a message | Estimates the rating group (Low 1-3, Middle 4-7, High 8-10) of an unrated message with a compressed DistilBERT model, and lists the watchlist topics it mentions. Also classifies a CSV of messages and sorts the likely poor experiences first |
 | Predict helpfulness | Estimates whether a new review will rank in the top 25% of helpful votes among reviews posted in the same month (LightGBM) |
-| Review insights | Sentiment, keyword watchlist, semantic themes and the words that separate low from high ratings, overall or by condition |
+| Reviews Analysis | Sentiment, keyword watchlist, semantic themes and the words that separate low from high ratings, overall or by condition |
 | Model performance | Test results on 2016-2017 reviews, the comparison with a no-skill baseline, and the training logs |
 | About | Purpose, method and limits |
 
@@ -20,6 +24,8 @@ Analytics Techniques and Tools course at Jose Rizal University on the UCI Drug R
 app.py                  entry point and navigation
 core.py                 model loading, scoring and styling
 watchlist.py            keyword watchlist rules (same as the NLP notebook)
+glossary.py             tooltip definitions
+dash.py                 shared filters, calculations and charts for the dashboard pages
 views/                  one file per page
 models/run2/            exported models (from models/run2 in the project Drive)
 data/                   summary files from the notebooks
@@ -35,6 +41,9 @@ Files copied from the project Drive:
 | `derived/nlp/reviews_analysis.json` | `data/reviews_analysis.json` |
 | `derived/nlp/watchlist_term_frequency.csv` | `data/watchlist_term_frequency.csv` |
 | `derived/predictive/training_log_run2.json` | `data/training_log_run2.json` |
+| `derived/dashboard/overview_cube.parquet` | `data/overview_cube.parquet` |
+| `derived/dashboard/overview_meta.json` | `data/overview_meta.json` |
+| `derived/dashboard/predictive_cube.parquet` | `data/predictive_cube.parquet` |
 
 ## Run locally
 

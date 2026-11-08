@@ -1,0 +1,237 @@
+{
+ "run": 2,
+ "created": "2026-11-08T17:45:26",
+ "years": [
+  2008,
+  2017
+ ],
+ "not_recorded_label": "Condition not recorded",
+ "rank_min_reviews": 30,
+ "bands": [
+  "1 to 2",
+  "3 to 5",
+  "6 to 10",
+  "11 to 30",
+  "31 to 100",
+  "Over 100"
+ ],
+ "records": 215063,
+ "rules": {
+  "volume": "all records",
+  "opinions": "distinct reviews (is_group_primary)",
+  "conditions": "condition_valid, else 'Condition not recorded'",
+  "medications": "brand and generic names separate"
+ },
+ "all_data": {
+  "reviews": 130558,
+  "mean": 7.008226228955714,
+  "median": 8,
+  "mode": 10,
+  "polarised": 0.45465616813983056,
+  "rated_1": 0.13542640052696886,
+  "rated_10": 0.3192297676128617,
+  "medications": 2745,
+  "thin": 1046,
+  "thin_share": 0.38105646630236795,
+  "concentration": [
+   {
+    "condition": "Birth Control",
+    "reviews": 19579,
+    "share": 0.14996400067402993
+   },
+   {
+    "condition": "Depression",
+    "reviews": 7201,
+    "share": 0.055155563044777034
+   },
+   {
+    "condition": "Pain",
+    "reviews": 5317,
+    "share": 0.040725194932520414
+   },
+   {
+    "condition": "Anxiety",
+    "reviews": 5190,
+    "share": 0.03975244718822286
+   },
+   {
+    "condition": "Acne",
+    "reviews": 4567,
+    "share": 0.03498062163942462
+   },
+   {
+    "condition": "Insomnia",
+    "reviews": 3473,
+    "share": 0.026601204062562233
+   },
+   {
+    "condition": "Bipolar Disorder",
+    "reviews": 3330,
+    "share": 0.0255059054213453
+   },
+   {
+    "condition": "Weight Loss",
+    "reviews": 3120,
+    "share": 0.023897424899278482
+   },
+   {
+    "condition": "Obesity",
+    "reviews": 2773,
+    "share": 0.021239602322339495
+   },
+   {
+    "condition": "Vaginal Yeast Infection",
+    "reviews": 2651,
+    "share": 0.02030515173332925
+   }
+  ],
+  "funnel": [
+   {
+    "band": "1 to 2",
+    "medications": 1046,
+    "sd": 2.917296496181112,
+    "perfect_share": 0.375717017208413
+   },
+   {
+    "band": "3 to 5",
+    "medications": 461,
+    "sd": 2.003893581716072,
+    "perfect_share": 0.08026030368763558
+   },
+   {
+    "band": "6 to 10",
+    "medications": 271,
+    "sd": 1.550306663937658,
+    "perfect_share": 0.007380073800738007
+   },
+   {
+    "band": "11 to 30",
+    "medications": 395,
+    "sd": 1.4454817848283616,
+    "perfect_share": 0.005063291139240506
+   },
+   {
+    "band": "31 to 100",
+    "medications": 298,
+    "sd": 1.2431111558143655,
+    "perfect_share": 0.0
+   },
+   {
+    "band": "Over 100",
+    "medications": 274,
+    "sd": 1.1796622678405313,
+    "perfect_share": 0.0
+   }
+  ],
+  "high_share": [
+   {
+    "condition": "Weight Loss",
+    "share": 0.7653846153846153
+   },
+   {
+    "condition": "Obesity",
+    "share": 0.717634331049405
+   },
+   {
+    "condition": "Anxiety",
+    "share": 0.7102119460500963
+   },
+   {
+    "condition": "Pain",
+    "share": 0.7015234154598458
+   },
+   {
+    "condition": "Acne",
+    "share": 0.6525071162688855
+   },
+   {
+    "condition": "Bipolar Disorder",
+    "share": 0.627927927927928
+   },
+   {
+    "condition": "Depression",
+    "share": 0.617275378419664
+   },
+   {
+    "condition": "Insomnia",
+    "share": 0.5896919090123812
+   },
+   {
+    "condition": "Birth Control",
+    "share": 0.4599315593237653
+   },
+   {
+    "condition": "Vaginal Yeast Infection",
+    "share": 0.25575254620897775
+   }
+  ]
+ },
+ "design_check": [
+  {
+   "figure": "Reviews",
+   "design": 130558.0,
+   "calculated": 130558.0,
+   "match": true
+  },
+  {
+   "figure": "Average rating",
+   "design": 7.01,
+   "calculated": 7.01,
+   "match": true
+  },
+  {
+   "figure": "Polarised share %",
+   "design": 45.5,
+   "calculated": 45.5,
+   "match": true
+  },
+  {
+   "figure": "Thin averages %",
+   "design": 38.1,
+   "calculated": 38.1,
+   "match": true
+  },
+  {
+   "figure": "Medications",
+   "design": 2745.0,
+   "calculated": 2745.0,
+   "match": true
+  },
+  {
+   "figure": "Thin medications",
+   "design": 1046.0,
+   "calculated": 1046.0,
+   "match": true
+  },
+  {
+   "figure": "Rated 1 %",
+   "design": 13.5,
+   "calculated": 13.5,
+   "match": true
+  },
+  {
+   "figure": "Rated 10 %",
+   "design": 31.9,
+   "calculated": 31.9,
+   "match": true
+  },
+  {
+   "figure": "Birth Control reviews",
+   "design": 19579.0,
+   "calculated": 19579.0,
+   "match": true
+  },
+  {
+   "figure": "Vaginal Yeast Infection rated 8+ %",
+   "design": 25.6,
+   "calculated": 25.6,
+   "match": true
+  },
+  {
+   "figure": "1 to 2 reviews: perfect 10 %",
+   "design": 37.6,
+   "calculated": 37.6,
+   "match": true
+  }
+ ]
+}

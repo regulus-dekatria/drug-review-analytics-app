@@ -8,8 +8,8 @@ import watchlist
 from core import (DATA_DIR, GROUPS, categories, footer, models_ready, prob_bars, served_name, served_probs,
                   tfidf_probs, word_pushes, preprocessing)
 
-st.title("Classify a message")
-st.write("Paste an unrated patient message. The model estimates which rating group the patient would most likely "
+from dash import hero
+hero("Predict · Classify a message", "Classify a message", "Paste an unrated patient message. The model estimates which rating group the patient would most likely "
          "give (Low 1-3, Middle 4-7, High 8-10) and lists the watchlist topics the message mentions.")
 
 if not models_ready():

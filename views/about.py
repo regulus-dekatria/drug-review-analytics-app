@@ -3,8 +3,13 @@ import streamlit as st
 
 from core import footer, manifest
 
-st.title("About")
+from dash import hero
+hero("Models and data · About", "About", "")
 st.markdown("""
+**Built by Jomari Manto**, BS Information Technology in Business Analytics, Jose Rizal University, for the
+Analytics Techniques and Tools course.
+
+
 **Drug Review Analytics** helps pharmacy managers and drug safety teams read patient feedback at scale. It was built
 for the Analytics Techniques and Tools course at Jose Rizal University, on the UCI Drug Review dataset
 (Drugs.com reviews posted from 2008 to 2017).
@@ -13,9 +18,13 @@ for the Analytics Techniques and Tools course at Jose Rizal University, on the U
 
 | Page | Use |
 |---|---|
+| Overview | The headline figures and four business questions, filtered live by condition, medication and year |
+| Volume Analysis, Average Ratings, Rating Dispersion, Rankings | The prelim and midterm descriptive dashboard, rebuilt on the same filters |
+| Reviews Analysis | Sentiment, keyword watchlist, semantic themes and word comparison from the review text |
+| Predictive Insights | Where the rating model's calls land on the 2016 to 2017 test reviews, by condition and medication |
+| Data dictionary | The source and derived fields |
 | Classify a message | Estimate the rating group of an unrated message and list the topics it raises, so poor experiences are read first |
 | Predict helpfulness | Estimate whether a new review will rank among the most helpful of its month |
-| Review insights | Sentiment, watchlist topics, themes and words across all reviews or one condition |
 | Model performance | Test results, the comparison with a no-skill baseline, and the training logs |
 
 #### How the models were built
@@ -38,6 +47,9 @@ for the Analytics Techniques and Tools course at Jose Rizal University, on the U
 m = manifest()
 if m:
     with st.expander("Model versions"):
-        st.json({"run": m.get("run"), "created": m.get("created"), "served": {"rating group": m.get("objective1_served"),
-                 "helpfulness": m.get("objective2_served")}, "libraries": m.get("versions")})
+        import pandas as pd
+        rows = [("Model run", str(m.get("run"))), ("Exported", str(m.get("created", "")).replace("T", " ")),
+                ("Rating-group model served", m.get("objective1_served", "")), ("Helpfulness model served", m.get("objective2_served", ""))]
+        rows += [(f"Library: {k}", v) for k, v in (m.get("versions") or {}).items()]
+        st.dataframe(pd.DataFrame(rows, columns=["Item", "Version"]), hide_index=True, width="stretch")
 footer()

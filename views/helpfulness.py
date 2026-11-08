@@ -3,8 +3,8 @@ import streamlit as st
 
 from core import categories, footer, helpfulness, models_ready, preprocessing
 
-st.title("Predict helpfulness")
-st.write("Enter a new review and its details. The model estimates the chance that readers will rank it in the top "
+from dash import hero
+hero("Predict · Predict helpfulness", "Predict helpfulness", "Enter a new review and its details. The model estimates the chance that readers will rank it in the top "
          "25% of helpful votes among reviews posted in the same month.")
 
 if not models_ready():

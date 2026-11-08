@@ -5,9 +5,10 @@ import streamlit as st
 
 from core import AQUA, BLUE, CYAN, ICE, INK, MUTED, NAVY, footer, reviews_analysis
 
-st.title("Review insights")
-st.write("What patients write about, measured on the distinct reviews from 2008 to 2017. Choose a condition to see "
-         "its own picture.")
+from dash import hero
+hero("Dashboard · Reviews Analysis", "What patients write about",
+     "Natural language processing on the review text itself: sentiment, a keyword watchlist, semantic themes and the words that "
+     "separate low ratings from high ones, measured on the distinct reviews from 2008 to 2017.")
 
 ra = reviews_analysis()
 if ra is None:
@@ -25,7 +26,8 @@ def hbar(labels, values, colour=BLUE, suffix="%"):
 
 
 views = list(ra["views"].keys())
-view = st.selectbox("Condition", views, index=0)
+pick = st.session_state.get("f_cond", "All conditions")
+view = st.selectbox("Condition (the ten largest have their own analysis)", views, index=views.index(pick) if pick in views else 0)
 v = ra["views"][view]
 st.caption(f"{v['reviews']:,} reviews in this view · source: {ra['basis']} · NLP run {ra.get('run', '?')}")
 
