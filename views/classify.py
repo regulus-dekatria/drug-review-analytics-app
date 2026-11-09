@@ -5,12 +5,12 @@ import pandas as pd
 import streamlit as st
 
 import watchlist
-from core import (DATA_DIR, GROUPS, categories, footer, models_ready, prob_bars, served_name, served_probs,
+from core import (DATA_DIR, GROUPS, categories, models_ready, prob_bars, served_name, served_probs,
                   tfidf_probs, word_pushes, preprocessing)
+from dash import box, card, esc, kpis, row
 
 from dash import hero
-hero("Predict · Classify a message", "Classify a message", "Paste an unrated patient message. The model estimates which rating group the patient would most likely "
-         "give (Low 1-3, Middle 4-7, High 8-10) and lists the watchlist topics the message mentions.")
+hero("Classify a Message")
 
 if not models_ready():
     st.stop()
@@ -19,13 +19,15 @@ if "soft_log" not in st.session_state:
     st.session_state.soft_log = []
 keep = watchlist.kept_terms(DATA_DIR / "watchlist_term_frequency.csv")
 
-single, batch = st.tabs(["One message", "Many messages (CSV)"])
+single, batch = st.tabs(["One Message", "Many Messages (CSV)"])
 
 with single:
     with st.form("classify"):
         text = st.text_area("Patient message", height=140, max_chars=3000,
+                            help="Paste a message without a star rating. The model estimates whether the patient would rate "
+                                 "the experience Low (1 to 3), Middle (4 to 7) or High (8 to 10), and lists the topics it raises.",
                             placeholder="e.g. Made me so dizzy I could not drive. Stopped after a week.")
-        condition = st.selectbox("Condition (optional, sharpens the side-effect list)", ["Unknown"] +
+        condition = st.selectbox("Condition (optional, improves the side-effect list)", ["Unknown"] +
                                  [c for c in categories()["conditions"] if c != "Unknown"], index=0)
         submitted = st.form_submit_button("Classify", type="primary")
 
@@ -38,43 +40,39 @@ with single:
                 st.info("Very short messages give the model little to read, so treat this result with caution.")
             p = served_probs([text])[0]
             group = GROUPS[int(p.argmax())]
-            left, right = st.columns([1.1, 1])
-            with left:
-                st.markdown(prob_bars(p, f"Predicted rating group · {served_name()}"), unsafe_allow_html=True)
-                if group == "Low":
-                    st.markdown("**Suggested action:** read and respond first; this message likely describes a poor experience.")
-                elif group == "Middle":
-                    st.markdown("**Suggested action:** mixed experience; check the watchlist topics for what went wrong.")
-                else:
-                    st.markdown("**Suggested action:** likely a positive experience; no follow-up needed unless a topic below stands out.")
-            with right:
-                hits = watchlist.scan(text, condition, keep)
-                st.markdown("**Watchlist topics**")
-                if not hits:
-                    st.caption("No watchlist terms found.")
-                for cat in watchlist.CATEGORY_ORDER:
-                    terms = [h for h in hits if h["category"] == cat]
-                    if terms:
-                        chips = "".join(f"<span class='chip{' absent' if h['negated'] and cat == watchlist.SE else ''}'>{h['term']}</span>"
-                                        for h in terms)
-                        st.markdown(f"{cat}<br>{chips}", unsafe_allow_html=True)
-                if any(h["negated"] and h["category"] == watchlist.SE for h in hits):
-                    st.caption("Struck-through terms follow a negation (\"no nausea\"), so they may describe an absent symptom.")
-            with st.expander("Compare with the word-based model"):
+            hits = watchlist.scan(text, condition, keep)
+            action = {"Low": "Read and respond first. This message most likely describes a poor experience.",
+                      "Middle": "A mixed experience. Check the topics on the right for what went wrong.",
+                      "High": "Most likely a positive experience. No follow-up needed unless a topic stands out."}[group]
+            topics = ""
+            for cat in watchlist.CATEGORY_ORDER:
+                terms = [h for h in hits if h["category"] == cat]
+                if terms:
+                    tags = "".join(f"<span class='tag {'plain absent' if h['negated'] and cat == watchlist.SE else 'plain'}'>{esc(h['term'])}</span>"
+                                   for h in terms)
+                    topics += f"<div class='sublabel'>{esc(cat)}</div><div class='tags'>{tags}</div>"
+            negated = any(h["negated"] and h["category"] == watchlist.SE for h in hits)
+            row(card("Predicted Rating Group", prob_bars(p, "Most likely group") + f"<div class='action'><b>Suggested action:</b> {action}</div>",
+                     key="groups", delay=.02),
+                card("Topics Raised", topics or "<div class='lead-in'>No watchlist topics found in this message.</div>",
+                     "Struck-through terms follow a word like \"no\" (\"no nausea\"), so the symptom may be absent." if negated else "",
+                     key="watchlist", delay=.06))
+            st.markdown("<div class='disclaimer'>These are estimates from patient wording, not medical advice.</div>", unsafe_allow_html=True)
+            with st.expander("Compare with the Word-Based Model"):
                 pt = tfidf_probs([text])[0]
-                st.markdown(prob_bars(pt, f"Word-based model · {preprocessing().get('objective1_fallback', 'TF-IDF')}"), unsafe_allow_html=True)
+                st.markdown(f"<div class='card'>{prob_bars(pt, 'Word-based model')}</div>", unsafe_allow_html=True)
                 low, high = word_pushes(text)
                 st.write(f"Words pushing toward Low: **{', '.join(low) or '-'}**")
                 st.write(f"Words pushing toward High: **{', '.join(high) or '-'}**")
-                st.caption("The served model reads whole sentences; the word-based model counts words. Where they disagree, "
-                           "the message is usually mixed or depends on context.")
+                st.caption("The main model reads whole sentences; this one counts words. When they disagree, the message "
+                           "is usually mixed or depends on context.")
             st.session_state.last = {"time": datetime.now().isoformat(timespec="seconds"), "message": text,
                                      "condition": condition, "model": served_name(), "predicted": group,
                                      **{f"p_{g.lower()}": round(float(v), 3) for g, v in zip(GROUPS, p)},
                                      "topics": "; ".join(sorted({h["category"] for h in hits}))}
 
     if st.session_state.get("last"):
-        st.markdown("#### Test log")
+        st.markdown("<div class='qt'>Test Log</div>", unsafe_allow_html=True)
         c1, c2 = st.columns([2, 1])
         call = c1.radio("Which group would you give this message?", GROUPS, horizontal=True, index=None, key=f"call_{len(st.session_state.soft_log)}")
         if c2.button("Record", disabled=call is None):
@@ -85,15 +83,16 @@ with single:
     log = st.session_state.soft_log
     if log:
         df = pd.DataFrame(log)
-        st.caption(f"{len(df)} recorded this session · you agree with the model on {df['agree'].mean() * 100:.0f}%")
+        st.markdown(kpis([("Messages Recorded", f"{len(df)}", "this session", None, "list_alt"),
+                          ("You Agree With the Model", f"{df['agree'].mean() * 100:.1f}%", "of recorded messages", None, "handshake")], n=2),
+                    unsafe_allow_html=True)
         st.dataframe(df[["message", "predicted", "your_call", "agree", "topics"]], hide_index=True, width="stretch")
         st.download_button("Download test log (CSV)", df.to_csv(index=False).encode(), "soft_test_log_app.csv", "text/csv")
         st.caption("The log lives only in this browser session; download it before closing the page.")
 
 with batch:
-    st.write("Upload a CSV with a column named **message** (up to 500 rows). Messages are sorted with the most likely "
-             "poor experiences first, so a team can read from the top.")
-    up = st.file_uploader("CSV file", type="csv")
+    up = st.file_uploader("CSV file with a column named message (up to 500 rows)", type="csv",
+                          help="Results are sorted with the most likely poor experiences first, so the team can read from the top.")
     if up is not None:
         try:
             df = pd.read_csv(up)
@@ -112,10 +111,9 @@ with batch:
             df["topics"] = ["; ".join(sorted({h["category"] for h in watchlist.scan(m, "Unknown", keep)})) for m in df["message"].astype(str)]
             df = df.sort_values("p_low", ascending=False)
             counts = df["predicted"].value_counts().reindex(GROUPS, fill_value=0)
-            m1, m2, m3 = st.columns(3)
-            for col, g in zip((m1, m2, m3), GROUPS):
-                col.metric(g, f"{counts[g]:,}", f"{counts[g] / len(df) * 100:.0f}% of messages", delta_color="off")
+            icons = {"Low": "sentiment_dissatisfied", "Middle": "sentiment_neutral", "High": "sentiment_satisfied"}
+            st.markdown(kpis([(g, f"{counts[g]:,}", f"{counts[g] / len(df) * 100:.1f}% of messages", "groups", icons[g]) for g in GROUPS], n=3),
+                        unsafe_allow_html=True)
             st.dataframe(df, hide_index=True, width="stretch")
             st.download_button("Download results (CSV)", df.to_csv(index=False).encode(), "classified_messages.csv", "text/csv")
 
-footer()

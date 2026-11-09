@@ -2,7 +2,7 @@
 
 DEFS = {
     "reviews": ("Reviews",
-                "The number of distinct patient reviews in view. A review published under both a brand and a generic "
+                "The number of patient reviews in view. A review listed under both a brand and a generic "
                 "name counts once, because it is one patient's opinion.", ""),
     "mean": ("Average Rating Score",
              "The average of all the rating scores patients gave. Because scores gather at the two ends of the scale, "
@@ -50,26 +50,50 @@ DEFS = {
               "The rating a medication has to average before it counts among the ten per cent best received.",
               "An average on its own is hard to judge. Knowing the entry price for the top tenth tells you straight away whether "
               "a 7.5 is strong or ordinary."),
-    # Model terms
-    "balacc": ("Balanced accuracy",
-               "The average of the hit rates in the Low, Middle and High groups, so each group counts equally.",
-               "Plain accuracy rewards guessing the most common group; balanced accuracy does not."),
-    "recall_low": ("Recall on Low", "The share of truly Low reviews (1 to 3 stars) the model finds.",
-                   "Low reviews are the ones a pharmacy team must not miss."),
-    "severe": ("Severe errors", "The share of reviews put at the opposite end: Low called High, or High called Low.",
+    # Reviews Analysis
+    "sentiment": ("Tone of the wording",
+                  "Whether the words in a review read as positive, neutral or negative, judged from the text alone and "
+                  "not from the star rating.", "The three shares add up to 100%."),
+    "vader_agree": ("Wording Matches Rating",
+                    "The share of reviews whose tone (positive, neutral or negative) matches the star rating the patient gave.",
+                    "When the two disagree, the review is usually mixed, sarcastic or about something other than the medication."),
+    "watchlist": ("Topics",
+                  "Reviews are scanned for words and phrases in six topics: side effects, switching medication, cost, "
+                  "the medication working, the medication not working, and dosage.",
+                  "A review can mention several topics, so the shares do not add up to 100%."),
+    "themes": ("Themes",
+               "Reviews grouped by what they talk about, based on the meaning of the text rather than single words. Each "
+               "theme is named by its most typical words.", ""),
+    "words": ("Words in low and high ratings",
+              "The words that appear far more often in one group than the other.",
+              "Larger words rank higher. Size shows rank only, not how much stronger one word is than the next. Words such as years and mg are real results: happy reviewers often write that they have used a medication for years, or name the dose that works."),
+    # Predictive and model terms
+    "test_reviews": ("Reviews checked",
+                     "Reviews posted in 2016 and 2017. The models learned only from earlier reviews, so these show how they "
+                     "perform on new messages.", "The year filter does not apply on this page."),
+    "groups": ("Rating groups", "Low is a rating of 1 to 3, Middle 4 to 7 and High 8 to 10.",
+               "Low messages most likely describe a poor experience and should be read first."),
+    "balacc": ("Balanced Accuracy",
+               "How often the model picks the right group, averaged so Low, Middle and High count equally.",
+               "A model that always guesses the most common group scores well on plain accuracy but poorly here."),
+    "recall_low": ("Recall on Low", "Of the reviews patients really rated 1 to 3, the share the model flags as Low.",
+                   "These are the messages a pharmacy team must not miss."),
+    "severe": ("Severe Errors", "Reviews put at the opposite end of the scale: a poor experience flagged as positive, or the reverse.",
                "These are the mistakes that would file a complaint with the praise."),
-    "capture": ("Low found reading the top 20%",
-                "If messages are sorted by the model's chance of Low and a team reads only the top fifth, this is the "
-                "share of all Low reviews it finds. Reading in arrival order finds 20%.", ""),
+    "capture": ("Low Found in the Top 20%",
+                "If the inbox is sorted by the model's chance of a poor experience and the team reads only the first fifth, "
+                "this is the share of all poor experiences it finds.", "Reading in arrival order finds 20%."),
     "auc": ("ROC AUC",
-            "The chance the model ranks a random helpful review above a random unhelpful one. 0.5 is chance, 1.0 is "
-            "perfect.", ""),
-    "prec10": ("Precision in the top 10%",
-               "Among the 10% of reviews the model ranks highest, the share that truly reached the top 25% of their "
-               "month.", "The base rate to beat is about 25%."),
-    "vader_agree": ("Wording agrees with stars",
-                    "The share of reviews where VADER's mood label (positive, neutral, negative) matches the rating "
-                    "group the reviewer chose.", ""),
+            "How well the model ranks reviews: the chance a truly helpful review scores higher than one that is not. "
+            "0.5 is a coin toss, 1.0 is perfect.", ""),
+    "prec10": ("Precision in the Top 10%",
+               "Of the 10% of reviews the model ranks highest, the share that really were among the most helpful quarter of their month.",
+               "Picking at random would give about 25%."),
+    # Data dictionary
+    "source_cols": ("Source columns", "The seven columns in the original Drugs.com file, with the known problems in each.", ""),
+    "basis": ("How figures are counted",
+              "Counts of medications, conditions and records use all 215,063 rows. Every rating figure uses the 130,558 "
+              "distinct reviews, so each patient counts once.", ""),
 }
 
 

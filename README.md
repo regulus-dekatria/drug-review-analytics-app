@@ -8,15 +8,15 @@ Analytics Techniques and Tools course at Jose Rizal University on the UCI Drug R
 
 | Page | What it does |
 |---|---|
-| Overview | Headline figures and four business questions |
+| Overview | Headline figures on satisfaction and where feedback sits |
 | Volume Analysis, Average Ratings, Rating Dispersion, Rankings | The descriptive dashboard from the prelim and midterm, filtered live by condition, medication and year |
 | Predictive Insights | The rating model's calls on the 2016-2017 test reviews, by condition and medication |
-| Data dictionary | Source and derived fields |
-| Classify a message | Estimates the rating group (Low 1-3, Middle 4-7, High 8-10) of an unrated message with a compressed DistilBERT model, and lists the watchlist topics it mentions. Also classifies a CSV of messages and sorts the likely poor experiences first |
-| Predict helpfulness | Estimates whether a new review will rank in the top 25% of helpful votes among reviews posted in the same month (LightGBM) |
+| Records | The cleaned table, one row per record, with duplicate copies and unusable conditions kept and marked |
+| Data Dictionary | Source and derived fields |
+| Classify a Message | Estimates the rating group (Low 1-3, Middle 4-7, High 8-10) of an unrated message with a compressed DistilBERT model, and lists the watchlist topics it mentions. Also classifies a CSV of messages and sorts the likely poor experiences first |
+| Predict Helpfulness | Estimates whether a new review will rank in the top 25% of helpful votes among reviews posted in the same month (LightGBM) |
 | Reviews Analysis | Sentiment, keyword watchlist, semantic themes and the words that separate low from high ratings, overall or by condition |
-| Model performance | Test results on 2016-2017 reviews, the comparison with a no-skill baseline, and the training logs |
-| About | Purpose, method and limits |
+| Model Performance | Test results on 2016-2017 reviews, the comparison with a no-skill baseline, and the training logs |
 
 ## Repository layout
 
@@ -66,3 +66,12 @@ main file `app.py`.
 English only; the rating group estimates the star rating a patient would give and is not a clinical judgement or
 medical advice; helpfulness partly reflects how many readers a medication's page gets. Nothing typed into the app is
 stored.
+
+## Records page data
+
+The Records page reads `data/records.parquet`, a slim copy of the cleaned dataset. To make it, download
+`reviews_clean.parquet` from the project Drive (derived folder) and run once:
+
+```
+python tools/make_records.py ~/Downloads/reviews_clean.parquet
+```

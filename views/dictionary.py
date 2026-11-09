@@ -2,12 +2,9 @@
 import pandas as pd
 import streamlit as st
 
-from core import footer
-from dash import hero
+from dash import box, esc, hero, show
 
-hero("Data · Data dictionary", "What each field means",
-     "The seven columns the source file carries, the known defect in each, and the fields the cleaning notebook adds. "
-     "Together they turn 215,063 rows into 130,558 opinions.")
+hero("Data Dictionary")
 
 SOURCE = [
     ("uniqueID", "integer", "The identifier the source file assigns to each record. Unique, not sequential."),
@@ -26,13 +23,16 @@ DERIVED = [
     ("review_date", "date", "The parsed date, plus year, month and quarter."),
     ("rating_band", "category", "Low 1 to 3, Middle 4 to 7, High 8 to 10."),
     ("review_word_count", "integer", "Length of the cleaned text in words."),
+    ("is_short_text_repeat", "boolean", "True on very short reviews whose text repeats elsewhere. They are flagged rather than merged, because a short phrase such as \"Works great\" can come from different patients."),
 ]
-cfg = {"Field": st.column_config.TextColumn(width="small"), "Type": st.column_config.TextColumn(width="small"),
-       "Description": st.column_config.TextColumn(width="large")}
-st.markdown("<div class='q'>Source columns</div>", unsafe_allow_html=True)
-st.dataframe(pd.DataFrame(SOURCE, columns=["Field", "Type", "Description"]), hide_index=True, width="stretch", column_config=cfg)
-st.markdown("<div class='q'>Added by the cleaning pipeline</div>", unsafe_allow_html=True)
-st.dataframe(pd.DataFrame(DERIVED, columns=["Field", "Type", "Description"]), hide_index=True, width="stretch", column_config=cfg)
-st.caption("The counting basis: counts of medications, conditions and records use all 215,063 records, and every rating "
-           "statistic uses the 130,558 distinct reviews.")
-footer()
+
+
+def dict_table(rows):
+    body = "".join(f"<tr><th scope='row'><code>{esc(f)}</code></th><td>{esc(t)}</td><td>{esc(d)}</td></tr>" for f, t, d in rows)
+    return f"<table class='dict'><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody>{body}</tbody></table>"
+
+
+with box("Source Columns", "dict-source", key="source_cols"):
+    show(dict_table(SOURCE))
+with box("Added by the Cleaning Pipeline", "dict-derived", key="basis"):
+    show(dict_table(DERIVED))

@@ -41,21 +41,23 @@ h2, h3, h4 { font-family: var(--f-sub) !important; font-weight: 600 !important; 
 /* Texture over flat palette colour: a fine dot grid gives the near-monochrome page depth without gradients. */
 [data-testid="stApp"]{ background-color: var(--ice);
   background-image: radial-gradient(rgba(13,71,161,.08) 1px, transparent 1.2px); background-size: 18px 18px; background-attachment: fixed; }
-[data-testid="stHeader"]{ background: transparent; }
 [data-testid="stSidebar"]{ background-color: var(--card);
   background-image: radial-gradient(rgba(13,71,161,.07) 1px, transparent 1.2px); background-size: 16px 16px;
   border-right: 1px solid var(--line); box-shadow: inset -1px 0 0 rgba(224,247,250,.7); }
 [data-testid="stSidebarNav"] a[aria-current="page"]{ background: rgba(224,247,250,.75) !important; box-shadow: inset 3px 0 0 var(--cyan), 0 1px 2px rgba(13,71,161,.08); }
 .side-h{ font-family:var(--f-sub); font-size:.74rem; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:6px 0 2px; }
 
-/* Hero band: flat navy, a light dot texture, an inner highlight along the top, and a deep shadow. */
-.hero{ position:relative; overflow:hidden; border-radius:18px; padding:24px 30px; margin:4px 0 18px; color:var(--ice);
+/* Page header: flat navy band with a light dot texture, a top highlight, a deep shadow and a cyan rule. Title only. */
+.hero{ position:relative; overflow:hidden; border-radius:16px; padding:18px 28px; margin:0 0 18px; color:var(--ice);
   background-color: var(--navy); background-image: radial-gradient(rgba(224,247,250,.14) 1px, transparent 1.3px); background-size: 16px 16px;
-  box-shadow: inset 0 1px 0 rgba(224,247,250,.30), var(--shadow-hi); border:1px solid rgba(11,37,69,.35); }
-.hero{ border-bottom: 6px solid var(--cyan); }
-.hero .eyebrow{ font-family:var(--f-sub); font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--aqua); }
-.hero .title{ font-family:var(--f-head); font-weight:700; font-size:2.05rem; line-height:1.15; margin:4px 0 6px; color:var(--ice); }
-.hero .lede{ max-width:860px; color:rgba(224,247,250,.88); position:relative; z-index:1; }
+  box-shadow: inset 0 1px 0 rgba(224,247,250,.30), var(--shadow-hi); border:1px solid rgba(11,37,69,.35); border-bottom: 6px solid var(--cyan); }
+.hero .title{ font-family:var(--f-head); font-weight:700; font-size:1.95rem; line-height:1.15; margin:0; color:var(--ice); }
+
+/* Room for the Streamlit Cloud toolbar: a solid, textured header so scrolled content passes under it, not through it. */
+[data-testid="stHeader"]{ background-color: var(--ice) !important;
+  background-image: radial-gradient(rgba(13,71,161,.08) 1px, transparent 1.2px); background-size: 18px 18px; background-attachment: fixed;
+  border-bottom: 1px solid var(--line); }
+[data-testid="stMainBlockContainer"], .block-container{ padding-top: 4.25rem !important; }
 
 /* Cards: flat card colour, a top highlight, a solid accent edge, layered shadow and a hover lift. */
 .card{ position:relative; background: var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 20px; margin:8px 0 14px;
@@ -63,7 +65,7 @@ h2, h3, h4 { font-family: var(--f-sub) !important; font-weight: 600 !important; 
 .card::before{ content:""; position:absolute; left:16px; right:16px; top:-1px; height:3px; border-radius:0 0 3px 3px; background: var(--cyan); }
 .card:hover{ box-shadow: var(--highlight), var(--shadow-hi); transform: translateY(-1px); }
 .card .label{ color:var(--muted); font-size:.82rem; display:flex; align-items:center; gap:6px; }
-.card .big{ font-family:var(--f-head); font-size:2rem; font-weight:700; color:var(--ink); line-height:1.2; font-variant-numeric:tabular-nums; }
+.card .big{ font-family:var(--f-head); font-size:2rem; font-weight:700 !important; color:var(--ink); line-height:1.2; font-variant-numeric:tabular-nums; }
 .card .sub{ color:var(--muted); font-size:.82rem; margin-top:2px; }
 .kpis{ display:grid; grid-template-columns: repeat(var(--n,4), minmax(0,1fr)); gap:16px; margin: 4px 0 8px; }
 @media (max-width: 1000px){ .kpis{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
@@ -71,13 +73,140 @@ h2, h3, h4 { font-family: var(--f-sub) !important; font-weight: 600 !important; 
 .kpi .ico{ display:inline-grid; place-items:center; width:30px; height:30px; border-radius:9px; margin-bottom:6px;
   background: rgba(224,247,250,.85); box-shadow: inset 0 0 0 1px var(--line); color:var(--navy); font-size:19px; }
 
-.q{ font-family:var(--f-sub); font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:var(--blue); }
-.qt{ font-family:var(--f-sub); font-weight:600; font-size:1.12rem; color:var(--ink); margin:2px 0 6px; }
+.qt{ font-family:var(--f-sub); font-weight:600; font-size:1.12rem; color:var(--ink); margin:2px 0 8px; display:flex; align-items:center; gap:6px; }
+
+/* Balanced rows: panels in one grid row share a height, the chart fills the middle and the note sits on the bottom edge. */
+.row{ display:grid; grid-template-columns: repeat(var(--n,2), minmax(0,1fr)); gap:16px; align-items:stretch; margin:8px 0 16px; }
+.row > .card{ margin:0; display:flex; flex-direction:column; }
+.row > .card > .body{ flex:1; }
+@media (max-width: 1000px){ .row{ grid-template-columns: minmax(0,1fr); } }
+
+/* Panels that hold Streamlit elements (tables, Plotly, controls) wear the same card styling. */
+[class*="st-key-card-"]{ position:relative; background: var(--card); border:1px solid var(--line); border-radius:14px; padding:16px 20px 18px;
+  margin:8px 0 16px; box-shadow: var(--highlight), var(--shadow); }
+[class*="st-key-card-"]::before{ content:""; position:absolute; left:16px; right:16px; top:-1px; height:3px; border-radius:0 0 3px 3px; background: var(--cyan); }
+[class*="st-key-card-"] .qt{ margin-bottom:0; }
+[class*="st-key-ctl-"]{ margin: 0 0 4px; }
+[class*="st-key-ctl-"] label p{ font-size:.82rem; color:var(--muted); }
+
+/* Word tags: navy for words typical of low ratings, aqua for high, matching the Low and High colours in the charts. */
+.tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.tag{ display:inline-block; border-radius:6px; padding:3px 10px; font-size:.86rem; box-shadow: inset 0 1px 0 rgba(224,247,250,.3); }
+.tag.low{ background:var(--navy); color:var(--ice); }
+.tag.high{ background:var(--aqua); color:var(--ink); }
+.tag.plain{ background:rgba(224,247,250,.9); color:var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+.tag.absent{ text-decoration: line-through; color:var(--muted); }
+.sublabel{ font-family:var(--f-sub); font-weight:600; font-size:.9rem; color:var(--ink); margin-top:4px; }
+.split{ display:grid; grid-template-columns: 1fr 1fr; gap:24px; }
+.cloud{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2px 16px; min-height:190px; padding:18px 16px;
+  margin-top:8px; border-radius:12px; line-height:1.15; text-align:center; }
+.cloud.low{ background:rgba(224,247,250,.85); color:var(--navy); box-shadow: inset 0 0 0 1px var(--line); }
+.cloud.high{ background-color:var(--navy); color:var(--aqua); box-shadow: inset 0 1px 0 rgba(224,247,250,.25);
+  background-image: radial-gradient(rgba(224,247,250,.10) 1px, transparent 1.3px); background-size: 14px 14px; }
+.cloud{ flex-direction:column; } .cline{ display:flex; flex-wrap:wrap; justify-content:center; align-items:baseline; gap:2px 16px; }
+.cloud span{ font-family:var(--f-head); letter-spacing:-0.01em; }
+.terms{ width:100%; border-collapse:collapse; table-layout:fixed; background:rgba(224,247,250,.6); border-radius:10px; overflow:hidden; font-size:.86rem; }
+.terms th, .terms td{ padding:9px 10px; text-align:left; vertical-align:top; border-bottom:1px solid rgba(13,71,161,.08); }
+.terms thead th{ color:var(--muted); font-weight:500; font-size:.8rem; border-bottom:1px solid rgba(13,71,161,.16); }
+.terms thead th:first-child, .terms tbody th{ width:190px; }
+.terms tbody th{ font-family:var(--f-sub); font-weight:600; color:var(--ink); }
+.terms tbody tr:nth-child(even){ background:rgba(204,241,246,.55); }
+.terms .t{ color:var(--ink); line-height:1.3; }
+.terms .n{ font-family:var(--f-num); font-size:.8rem; color:var(--muted); margin:2px 0 5px; font-variant-numeric:tabular-nums; }
+.terms .track{ height:5px; border-radius:3px; background:var(--track); overflow:hidden; }
+.terms .fill{ height:5px; border-radius:3px; background:var(--blue); }
+.terms .fill.lead{ background:var(--navy); }
+.disclaimer{ display:flex; align-items:center; gap:8px; margin:-4px 0 14px; color:var(--muted); font-size:.86rem; }
+.disclaimer::before{ content:'info'; font-family:'Material Symbols Rounded'; font-size:18px; color:var(--blue); }
+/* Panels side by side share one height; the note at the bottom of each lines up. */
+[data-testid="stHorizontalBlock"]:has([class*="st-key-card-"]){ align-items:stretch; }
+[data-testid="stColumn"]:has([class*="st-key-card-"]) > div{ height:100%; }
+[data-testid="stColumn"] [data-testid="stLayoutWrapper"]:has(> [class*="st-key-card-"]){ height:100%; }
+[data-testid="stColumn"] [class*="st-key-card-"]{ height:calc(100% - 16px); box-sizing:border-box; }
+[class*="st-key-card-"] > [data-testid="stElementContainer"]:last-child:has(.note){ margin-top:auto; }
+[class*="st-key-hd-"]{ margin-bottom:2px; }
+[class*="st-key-hd-"] .qt{ margin:0; }
+.scroll{ overflow-y:auto; padding-right:6px; }
+.scroll::-webkit-scrollbar{ width:6px; } .scroll::-webkit-scrollbar-thumb{ background:rgba(13,71,161,.22); border-radius:3px; }
+
+/* Centred bars (old dashboard): rated 1 to 3 or rated 1 reaches left, the high share right, the middle straddles the line. */
+.dvhead{ display:flex; justify-content:center; gap:12px; margin-left:var(--lw,200px); color:var(--muted); font-size:.74rem; margin-bottom:4px; }
+.dv{ display:flex; align-items:center; gap:10px; margin:5px 0; }
+.dv .name{ width:var(--lw,200px); flex:none; text-align:right; color:var(--ink); font-size:.86rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dvt{ position:relative; flex:1; height:18px; }
+.dvt .axis{ position:absolute; left:50%; top:-4px; bottom:-4px; border-left:1px solid rgba(13,71,161,.25); }
+.dvt b{ position:absolute; top:0; height:18px; }
+.dvt b.lo{ background:var(--navy); border-radius:6px 0 0 6px; }
+.dvt b.md{ background-color:var(--ice); background-image: repeating-linear-gradient(135deg, var(--cyan) 0 2.5px, transparent 2.5px 7px); box-shadow: inset 0 0 0 1px var(--cyan); }
+.dvt b.hi{ background:var(--blue); border-radius:0 6px 6px 0; }
+.dvt b.hi em{ position:absolute; right:6px; top:1px; font-style:normal; font-family:var(--f-num); font-size:.74rem; color:var(--ice); }
+.dv:hover .name{ color:var(--blue); } .dv:hover .dvt{ filter:brightness(1.08); }
+
+/* Dot plot (old dashboard): every medication on one axis from zero. */
+.dt{ display:flex; align-items:center; gap:10px; margin:3px 0; }
+.dt .name{ width:var(--lw,190px); flex:none; text-align:right; color:var(--ink); font-size:.86rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dtt{ position:relative; flex:1; height:22px; }
+.dtt i{ position:absolute; top:0; bottom:0; border-left:1px solid rgba(13,71,161,.10); }
+.dtt b{ position:absolute; top:50%; width:10px; height:10px; margin:-5px 0 0 -5px; border-radius:50%; background:var(--navy); box-shadow:0 0 0 2px rgba(224,247,250,.9); }
+.dt .pct{ width:44px; flex:none; text-align:right; font-family:var(--f-num); font-size:.82rem; color:var(--ink); }
+.dtaxis .dtt{ height:16px; } .dtaxis .dtt span{ position:absolute; transform:translateX(-50%); font-family:var(--f-num); font-size:.72rem; color:var(--muted); }
+.dt:hover .name{ color:var(--blue); } .dt:hover b{ background:var(--blue); }
+.mark.m2{ border-left-style:dotted; border-left-color:var(--blue); } .mark.m2 span{ top:14px; color:var(--blue); }
+.mark.m3{ border-left-style:solid; border-left-color:var(--cyan); } .mark.m3 span{ top:34px; }
+.ladder .rung.lane1, .ladder .rung.lane3{ display:flex; flex-direction:column-reverse; } .ladder .rung.lane1 i, .ladder .rung.lane3 i{ margin:4px auto 0; }
+.ladder .rung.lane1{ top:-50px; } .ladder .rung.lane3{ top:-88px; } .ladder .rung.lane2{ top:-9px; padding-top:58px; } .ladder .rung.lane2 i{ height:70px; margin-top:-58px; }
+.ladder .rung small{ white-space:nowrap; }
+.bandrow{ display:flex; align-items:center; gap:12px; } .bandrow > span{ width:96px; flex:none; text-align:right; color:var(--ink); font-size:.86rem; } .bandrow .stack{ flex:1; }
+/* Hover details on bars, dots and segments: the same navy box as the info tooltips. First line is the item name. */
+[data-tip]{ position:relative; }
+[data-tip]:hover::after{ content:attr(data-tip); white-space:pre-line; position:absolute; z-index:60; left:min(var(--lw, 40%), 60%); bottom:calc(100% + 6px);
+  min-width:170px; max-width:300px; padding:10px 12px; border-radius:10px; background:var(--navy); color:var(--ice); font-family:var(--f-body);
+  font-size:.8rem; line-height:1.45; text-align:left; font-weight:400; box-shadow: inset 0 1px 0 rgba(224,247,250,.25), 0 12px 28px rgba(11,37,69,.28);
+  pointer-events:none; }
+.stack [data-tip]:hover::after{ left:0; }
+.scroll [data-tip]:first-child:hover::after, .scroll [data-tip]:nth-child(2):hover::after{ bottom:auto; top:calc(100% + 6px); }
+.cloud [data-tip]:hover::after{ left:50%; transform:translateX(-50%); min-width:0; white-space:nowrap; font-size:.76rem; }
+.stack{ overflow:visible !important; } .stack > div[data-tip]{ overflow:visible !important; } .stack > div:first-child{ border-radius:9px 0 0 9px; } .stack > div:last-child{ border-radius:0 9px 9px 0; }
+.dict{ width:100%; border-collapse:collapse; table-layout:fixed; background:rgba(224,247,250,.6); border-radius:10px; overflow:hidden; font-size:.9rem; }
+.dict th, .dict td{ padding:10px 12px; text-align:left; vertical-align:top; border-bottom:1px solid rgba(13,71,161,.08); color:var(--ink); line-height:1.5; }
+.dict thead th{ color:var(--muted); font-weight:500; font-size:.82rem; border-bottom:1px solid rgba(13,71,161,.16); }
+.dict thead th:nth-child(1){ width:200px; } .dict thead th:nth-child(2){ width:160px; }
+.dict tbody th code{ font-family:var(--f-num); font-size:.84rem; color:var(--navy); background:none; padding:0; }
+.dict tbody tr:nth-child(even){ background:rgba(204,241,246,.55); }
+.mini{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px; }
+.mini > div{ background:rgba(224,247,250,.75); border-radius:10px; padding:10px 12px; box-shadow: inset 0 0 0 1px var(--line); }
+.mini span{ display:block; color:var(--muted); font-size:.8rem; } .mini b{ display:block; font-family:var(--f-head); font-weight:700; font-size:1.25rem; color:var(--ink); line-height:1.25; }
+.mini small{ color:var(--muted); font-size:.78rem; }
+[class*="st-key-card-"] [data-testid="stPageLink"] a{ font-family:var(--f-sub); font-weight:600; color:var(--blue); }
+.split3{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:10px 24px; }
+@media (max-width: 1000px){ .cloud{ display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2px 16px; min-height:190px; padding:18px 16px;
+  margin-top:8px; border-radius:12px; line-height:1.15; text-align:center; }
+.cloud.low{ background:rgba(224,247,250,.85); color:var(--navy); box-shadow: inset 0 0 0 1px var(--line); }
+.cloud.high{ background-color:var(--navy); color:var(--aqua); box-shadow: inset 0 1px 0 rgba(224,247,250,.25);
+  background-image: radial-gradient(rgba(224,247,250,.10) 1px, transparent 1.3px); background-size: 14px 14px; }
+.cloud span{ font-family:var(--f-head); letter-spacing:-0.01em; }
+.terms{ width:100%; border-collapse:collapse; table-layout:fixed; background:rgba(224,247,250,.6); border-radius:10px; overflow:hidden; font-size:.86rem; }
+.terms th, .terms td{ padding:9px 10px; text-align:left; vertical-align:top; border-bottom:1px solid rgba(13,71,161,.08); }
+.terms thead th{ color:var(--muted); font-weight:500; font-size:.8rem; border-bottom:1px solid rgba(13,71,161,.16); }
+.terms thead th:first-child, .terms tbody th{ width:190px; }
+.terms tbody th{ font-family:var(--f-sub); font-weight:600; color:var(--ink); }
+.terms tbody tr:nth-child(even){ background:rgba(204,241,246,.55); }
+.terms .t{ color:var(--ink); line-height:1.3; }
+.terms .n{ font-family:var(--f-num); font-size:.8rem; color:var(--muted); margin:2px 0 5px; font-variant-numeric:tabular-nums; }
+.terms .track{ height:5px; border-radius:3px; background:var(--track); overflow:hidden; }
+.terms .fill{ height:5px; border-radius:3px; background:var(--blue); }
+.terms .fill.lead{ background:var(--navy); }
+.split3{ grid-template-columns: minmax(0,1fr); } }
+.action{ margin-top:12px; color:var(--ink); }
+.sec-h{ font-family:var(--f-head); font-weight:700; font-size:1.4rem; color:var(--ink); margin:22px 0 6px; padding-left:12px;
+  box-shadow: inset 4px 0 0 var(--cyan); line-height:1.3; }
+.action b{ font-family:var(--f-sub); }
 .lead-in{ color:var(--muted); font-size:.88rem; margin:0 0 12px; }
 .note{ margin-top:12px; padding:10px 14px; border-radius:10px; color:var(--ink); background: rgba(224,247,250,.7); box-shadow: inset 3px 0 0 var(--cyan); }
 
 /* Bars and columns, solid palette colours */
 .bar{ display:flex; align-items:center; gap:10px; margin:5px 0; }
+.bar.tall{ margin:13.5px 0; }
 .bar .name{ width:var(--lw, 64px); flex:none; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-size:.9rem; }
 .bar .track{ flex:1; background:var(--track); border-radius:7px; height:14px; overflow:hidden; }
 .bar .fill{ height:14px; border-radius:7px; background:var(--blue); }
@@ -194,22 +323,25 @@ def kpi(label, value, sub="", key=None, icon="insights", delay=0.0):
             f"<div class='label'>{label} {t}</div><div class='big'>{value}</div><div class='sub'>{sub}</div></div>")
 
 
+def plot_layout(height, **extra):
+    # Plotly charts styled like the HTML charts: same fonts, ink colour, transparent background inside a card.
+    base = dict(height=height, margin=dict(l=8, r=8, t=8, b=8), paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(224,247,250,.55)",
+                font=dict(family="IBM Plex Sans", color=INK, size=13), hoverlabel=dict(bgcolor=NAVY, font_color=ICE, bordercolor=NAVY,
+                font_family="IBM Plex Sans"), legend=dict(orientation="h", y=1.12, x=0, font=dict(color=MUTED)))
+    base.update(extra)
+    return base
+
+
 def footer():
-    m = manifest()
-    served = (f"Rating groups: {m.get('objective1_served', 'n/a')} · Helpfulness: {m.get('objective2_served', 'n/a')}"
-              if m else "Models not found")
-    st.markdown("---")
-    st.caption(f"Built by Jomari Manto, BS Information Technology in Business Analytics, Jose Rizal University · "
-               f"Model run {m.get('run', '?') if m else '?'} · {served} · Trained on reviews from 2008-2015 and tested "
-               f"on 2016-2017. Not medical advice.")
+    # The footer line was removed in 0.4.0; kept as a no-op so older page code still runs.
+    return None
 
 
 def prob_bars(p, title):
     rows = "".join(f"<div class='pbar'><span class='name'>{g}</span><div class='track'>"
                    f"<div class='fill' style='width:{v * 100:.1f}%;background:{GROUP_COLOURS[g]};--d:{0.1 + i * 0.08:.2f}s'></div></div>"
                    f"<span class='pct'>{v * 100:.0f}%</span></div>" for i, (g, v) in enumerate(zip(GROUPS, p)))
-    return (f"<div class='card'><div class='label'>{title}</div>"
-            f"<div class='big'>{GROUPS[int(np.argmax(p))]}</div>{rows}</div>")
+    return f"<div class='label'>{title}</div><div class='big' style='margin-bottom:6px'>{GROUPS[int(np.argmax(p))]}</div>{rows}"
 
 
 # ------------------------------------------------------------------ loading
@@ -249,9 +381,24 @@ def training_log():
     return _json(logs[-1]) if logs else None
 
 
+def is_fragment(label):
+    """A condition label that is really a piece of page text: it starts mid-word (lower case) or closes a bracket it never opened."""
+    t = str(label).strip()
+    if t.lower().startswith(("von ", "de ")):  # real names that start in lower case, such as von Willebrand's Disease
+        return False
+    return bool(t) and (t[0].islower() or (")" in t and "(" not in t))
+
+
 @st.cache_data(show_spinner=False)
 def _parquet(path, mtime):
-    return pd.read_parquet(path)
+    df = pd.read_parquet(path)
+    if "condition_label" in df.columns:
+        nr = (_json(DATA_DIR / "overview_meta.json") or {}).get("not_recorded_label", "Condition not recorded")
+        frag = df["condition_label"].map(is_fragment)
+        if frag.any():
+            df = df.copy()
+            df.loc[frag, "condition_label"] = nr
+    return df
 
 
 def data_parquet(name):

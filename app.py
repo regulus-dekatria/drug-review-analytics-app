@@ -17,15 +17,15 @@ pages = {
         st.Page("views/predictive.py", title="Predictive Insights", icon=":material/online_prediction:"),
     ],
     "Predict": [
-        st.Page("views/classify.py", title="Classify a message", icon=":material/chat:"),
-        st.Page("views/helpfulness.py", title="Predict helpfulness", icon=":material/thumb_up:"),
+        st.Page("views/classify.py", title="Classify a Message", icon=":material/chat:"),
+        st.Page("views/helpfulness.py", title="Predict Helpfulness", icon=":material/thumb_up:"),
     ],
-    "Models and data": [
-        st.Page("views/performance.py", title="Model performance", icon=":material/monitoring:"),
-        st.Page("views/dictionary.py", title="Data dictionary", icon=":material/menu_book:"),
-        st.Page("views/about.py", title="About", icon=":material/info:"),
+    "Models and Data": [
+        st.Page("views/performance.py", title="Model Performance", icon=":material/monitoring:"),
+        st.Page("views/records.py", title="Records", icon=":material/table_rows:"),
+        st.Page("views/dictionary.py", title="Data Dictionary", icon=":material/menu_book:"),
     ],
 }
 if not models_ready():
     st.error("The model files are missing. Copy the contents of models/run2 from the project Drive into models/run2 in this repository.")
-st.navigation(pages).run()
+st.navigation(pages, expanded=True).run()

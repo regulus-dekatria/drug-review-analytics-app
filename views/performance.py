@@ -1,103 +1,122 @@
-"""Test results and training logs of the predictive models."""
+"""Test results and training logs of the predictive models, and the checks on the review text analysis."""
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from core import AQUA, BLUE, CYAN, INK, MUTED, NAVY, footer, metrics, training_log
+from core import AQUA, BLUE, CYAN, NAVY, metrics, plot_layout, reviews_analysis, training_log
+from dash import bars, box, card, hero, kpis, legend, note, row, title_case
 
-from dash import hero
-hero("Models · Model performance", "Model performance", "Every model learned from reviews posted from 2008 to 2015 and was tested once on 52,524 reviews from 2016 "
-         "and 2017 that it never saw. Testing on later years copies real use: trained on the past, applied to new messages.")
-
+hero("Model Performance")
 m = metrics()
 if m is None:
     st.error("models/run2/metrics.json is missing.")
     st.stop()
 
-LAYOUT = dict(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font=dict(family="IBM Plex Sans", color=INK),
-              margin=dict(l=10, r=10, t=30, b=10))
+
+def section(title):
+    st.markdown(f"<div class='sec-h'>{title}</div>", unsafe_allow_html=True)
+
 
 o1 = m["objective1"]
-st.header("Objective 1 · rating group from text")
 served = o1["served"]
 s = o1["test"].get(served) or o1["test"].get("DistilBERT", {})
-k1, k2, k3, k4 = st.columns(4)
-k1.metric("Balanced accuracy", f"{s.get('balanced accuracy', 0) * 100:.1f}%", help="Average hit rate across the three groups.")
-k2.metric("Recall on Low", f"{s.get('recall Low', 0) * 100:.1f}%", help="Share of truly Low reviews found.")
-k3.metric("Severe errors", f"{s.get('severe error rate', 0) * 100:.1f}%", help="Low called High, or High called Low.")
-k4.metric("Low found reading top 20%", f"{o1['capture_rate'].get('20%', 0) * 100:.0f}%", help="Reading in arrival order finds 20%.")
-full_only = served not in o1["test"]
-st.caption((f"Figures from the full DistilBERT on all 52,524 test reviews; the app serves its compressed copy, checked "
-            f"against it on a random sample of test reviews (see the compressed model check below). " if full_only else
-            f"Served model: {served}. ") +
-           f"Baseline (always High): {o1['test']['Baseline (always High)']['accuracy'] * 100:.1f}% accuracy, 0% recall on Low.")
+section("Rating Group Model")
+st.markdown(kpis([
+    ("Balanced Accuracy", f"{s.get('balanced accuracy', 0) * 100:.1f}%", "average hit rate across Low, Middle and High", "balacc", "target"),
+    ("Recall on Low", f"{s.get('recall Low', 0) * 100:.1f}%", "truly Low reviews found", "recall_low", "sentiment_dissatisfied"),
+    ("Severe Errors", f"{s.get('severe error rate', 0) * 100:.1f}%", "Low called High, or High called Low", "severe", "error"),
+    ("Low Found in the Top 20%", f"{o1['capture_rate'].get('20%', 0) * 100:.1f}%", "reading in arrival order finds 20%", "capture", "manage_search")]),
+    unsafe_allow_html=True)
 
-t1 = pd.DataFrame(o1["test"]).T[["accuracy", "balanced accuracy", "macro F1", "recall Low", "severe error rate"]] * 100
-fig = go.Figure()
-for col, colour in zip(["balanced accuracy", "recall Low", "severe error rate"], [NAVY, CYAN, AQUA]):
-    fig.add_bar(name=col, y=t1.index, x=t1[col], orientation="h", marker_color=colour)
-fig.update_layout(barmode="group", height=60 * len(t1) + 80, yaxis=dict(autorange="reversed"),
-                  xaxis=dict(title="% of test reviews"), legend=dict(orientation="h", y=1.1), **LAYOUT)
-st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
-st.dataframe(t1.round(1), width="stretch")
+t1 = pd.DataFrame(o1["test"]).T[["accuracy", "balanced accuracy", "macro F1", "recall Low", "severe error rate"]]
+order = t1.sort_values("balanced accuracy", ascending=False).index
+lead = order[0]
+base = o1["test"]["Baseline (always High)"]["accuracy"]
+row(card("Balanced Accuracy by Model", bars(t1.loc[order, "balanced accuracy"], lambda v: f"{v * 100:.1f}%", lead=lead, label_w=230, scale=1),
+         f"{lead} is the strongest model. The app serves its compressed copy (checked below). A model that always answers High "
+         f"scores {base * 100:.1f}% plain accuracy but finds no Low reviews at all.", key="balacc", delay=.04,
+         lead="Tested once on 52,524 reviews from 2016 and 2017 that no model saw in training."),
+    card("Severe Errors by Model", bars(t1.loc[order, "severe error rate"], lambda v: f"{v * 100:.1f}%", lead=lead, label_w=230, scale=t1["severe error rate"].max() or 1),
+         "Fewer severe errors means fewer complaints filed with the praise. Lower is better.", key="severe", delay=.08,
+         lead="Share of reviews put at the opposite end of the scale."))
+with box("Rating Group Results", "perf-o1", key="balacc"):
+    pc = lambda label: st.column_config.NumberColumn(label, format="%.1f%%")
+    st.dataframe(t1.loc[order] * 100, width="stretch", column_config={
+        "_index": st.column_config.TextColumn("Model"), "accuracy": pc("Accuracy"), "balanced accuracy": pc("Balanced Accuracy"),
+        "macro F1": pc("Macro F1"), "recall Low": pc("Recall on Low"), "severe error rate": pc("Severe Errors")})
 
-st.header("Objective 2 · helpful reviews")
 o2 = m["objective2"]
 s2 = o2["test"][o2["served"]]
-c1, c2, c3 = st.columns(3)
-c1.metric("ROC AUC", f"{s2['ROC AUC']:.3f}", help="0.5 is chance; 1.0 is perfect ranking.")
-c2.metric("Precision in top 10%", f"{s2['precision top 10%'] * 100:.1f}%", help="Share truly helpful among the 10% ranked highest.")
-c3.metric("Base rate", f"{o2['base_rate_test'] * 100:.1f}%")
-st.caption(f"Served model: {o2['served']}. The text added {o2['text_gain_auc']:+.3f} ROC AUC over rating, length, condition and medication.")
-st.dataframe((pd.DataFrame(o2["test"]).T).round(3), width="stretch")
+section("Helpfulness Model")
+st.markdown(kpis([
+    ("ROC AUC", f"{s2['ROC AUC']:.3f}", "0.5 is chance, 1.0 is perfect", "auc", "show_chart"),
+    ("Precision in the Top 10%", f"{s2['precision top 10%'] * 100:.1f}%", "truly helpful among the highest ranked", "prec10", "workspace_premium"),
+    ("Base Rate", f"{o2['base_rate_test'] * 100:.1f}%", "reviews that are truly helpful", None, "percent")], n=3), unsafe_allow_html=True)
+with box("Helpfulness Results", "perf-o2", key="auc"):
+    t2 = pd.DataFrame(o2["test"]).T
+    t2 = t2.sort_values("ROC AUC", ascending=False) if "ROC AUC" in t2 else t2
+    st.dataframe(t2, width="stretch", column_config={"_index": st.column_config.TextColumn("Model"),
+                 **{c: st.column_config.NumberColumn(title_case(c.replace("roc auc", "ROC AUC")), format="%.3f") for c in t2.columns}})
+    note(f"Served model: {o2['served']}. Adding the review text changed ROC AUC by {o2['text_gain_auc']:+.3f}, so the app uses the "
+         f"rating, length, condition and medication only.")
 
-st.header("Training logs")
+section("Training Logs")
 log = training_log()
 if log is None:
-    st.info("Copy derived/predictive/training_log_run2.json into data/ to show the training logs.")
+    st.info("Copy training_log_run2.json into data/ to show the training logs.")
 else:
     db = log.get("distilbert", {})
     a, b = st.columns(2)
     with a:
-        st.subheader("DistilBERT training loss")
-        if db.get("stage1_steps"):
-            fig = go.Figure()
-            s1 = pd.DataFrame(db["stage1_steps"])
-            fig.add_scatter(x=s1["step"], y=s1["loss"], name="stage 1 (choose passes)", line=dict(color=BLUE))
-            if db.get("stage2_steps"):
-                s2_ = pd.DataFrame(db["stage2_steps"])
-                fig.add_scatter(x=s2_["step"], y=s2_["loss"], name="stage 2 (final fit)", line=dict(color=NAVY))
-            fig.update_layout(height=320, xaxis_title="training step", yaxis_title="loss", legend=dict(orientation="h", y=1.15), **LAYOUT)
-            st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
-            st.caption("The loss falls quickly and then levels off: the model has learned what it can from the data.")
-        else:
-            st.caption(db.get("status", "DistilBERT was not trained in this run."))
+        with box("DistilBERT Training Loss", "perf-loss"):
+            if db.get("stage1_steps"):
+                fig = go.Figure()
+                s1 = pd.DataFrame(db["stage1_steps"])
+                fig.add_scatter(x=s1["step"], y=s1["loss"], name="stage 1 (choose passes)", line=dict(color=CYAN, width=2))
+                if db.get("stage2_steps"):
+                    s2_ = pd.DataFrame(db["stage2_steps"])
+                    fig.add_scatter(x=s2_["step"], y=s2_["loss"], name="stage 2 (final fit)", line=dict(color=NAVY, width=2))
+                fig.update_layout(**plot_layout(300), xaxis_title="training step", yaxis_title="loss")
+                st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+                note("The loss falls quickly, then levels off: the model has learned what it can from the data.")
+            else:
+                note(db.get("status", "DistilBERT was not trained in this run."))
     with b:
-        st.subheader("Validation score after each pass")
-        if db.get("stage1_passes"):
-            p = pd.DataFrame(db["stage1_passes"])
-            fig = go.Figure(go.Scatter(x=p["epoch"], y=p["validation_balanced_accuracy"] * 100, mode="lines+markers",
-                                       line=dict(color=NAVY, width=3)))
-            fig.update_layout(height=320, xaxis=dict(title="pass", dtick=1), yaxis_title="2015 balanced accuracy (%)", **LAYOUT)
-            st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
-            st.caption(f"Passes kept: {db.get('best_passes')}. A rising score means the model is still learning general "
-                       f"patterns rather than memorising the training reviews.")
-    st.subheader("LightGBM: validation ROC AUC by number of trees")
-    fig = go.Figure()
-    for (name, g), colour in zip(log.get("lightgbm", {}).items(), [NAVY, BLUE, CYAN]):
-        fig.add_scatter(y=g["validation_auc"], name=name, line=dict(color=colour))
-        fig.add_scatter(x=[g["best_trees"] - 1], y=[g["validation_auc"][g["best_trees"] - 1]], mode="markers",
-                        marker=dict(color=colour, size=10), showlegend=False)
-    fig.update_layout(height=320, xaxis_title="trees", yaxis_title="2015 ROC AUC", legend=dict(orientation="h", y=1.15), **LAYOUT)
-    st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
-    st.caption("Dots mark where early stopping ended training: adding trees no longer improved the 2015 score.")
+        with box("Validation Score After Each Pass", "perf-passes"):
+            if db.get("stage1_passes"):
+                p = pd.DataFrame(db["stage1_passes"])
+                fig = go.Figure(go.Scatter(x=p["epoch"], y=p["validation_balanced_accuracy"] * 100, mode="lines+markers",
+                                           line=dict(color=NAVY, width=3), marker=dict(size=9, color=NAVY)))
+                fig.update_layout(**plot_layout(300), xaxis=dict(title="pass", dtick=1), yaxis_title="2015 balanced accuracy (%)")
+                st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+                note(f"Passes kept: {db.get('best_passes')}. A rising score means the model is still learning general patterns, "
+                     f"not memorising the training reviews.")
+    with box("LightGBM: Validation ROC AUC by Number of Trees", "perf-trees"):
+        fig = go.Figure()
+        for (name, g), colour in zip(log.get("lightgbm", {}).items(), [NAVY, BLUE, CYAN]):
+            fig.add_scatter(y=g["validation_auc"], name=name, line=dict(color=colour, width=2))
+            fig.add_scatter(x=[g["best_trees"] - 1], y=[g["validation_auc"][g["best_trees"] - 1]], mode="markers",
+                            marker=dict(color=colour, size=10), showlegend=False)
+        fig.update_layout(**plot_layout(300), xaxis_title="trees", yaxis_title="2015 ROC AUC")
+        st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+        note("Dots mark where early stopping ended training: more trees no longer improved the 2015 score.")
     on = log.get("onnx", {})
     if on.get("passed") is not None:
-        st.subheader("Compressed model check")
-        st.write(f"The served DistilBERT is compressed from {on.get('size_mb_full', 0):.0f} MB to {on.get('size_mb_compressed', 0):.0f} MB. "
-                 f"On {on.get('reviews_tested', 0):,} test reviews it gives the same group as the full model "
-                 f"{on.get('agreement_with_full', 0) * 100:.2f}% of the time, with balanced accuracy "
-                 f"{on.get('balanced_accuracy_compressed', 0) * 100:.1f}% against {on.get('balanced_accuracy_full', 0) * 100:.1f}%. "
-                 f"One message takes about {on.get('median_ms_per_message', 0):.0f} ms on a plain processor.")
+        st.markdown(card("Compressed Model Check",
+                         f"<div class='lead-in'>The served DistilBERT is compressed from {on.get('size_mb_full', 0):.0f} MB to "
+                         f"{on.get('size_mb_compressed', 0):.0f} MB so it runs on a plain processor.</div>",
+                         f"On {on.get('reviews_tested', 0):,} test reviews it gives the same group as the full model "
+                         f"{on.get('agreement_with_full', 0) * 100:.2f}% of the time, with balanced accuracy "
+                         f"{on.get('balanced_accuracy_compressed', 0) * 100:.1f}% against {on.get('balanced_accuracy_full', 0) * 100:.1f}%. "
+                         f"One message takes about {on.get('median_ms_per_message', 0):.0f} ms.", delay=.04), unsafe_allow_html=True)
 
-footer()
+ra = reviews_analysis()
+val = (ra or {}).get("validation") or {}
+if val:
+    section("Review Text Analysis Checks")
+    st.markdown(kpis([
+        ("VADER Agreement", f"{val.get('vader_accuracy', 0):.1f}%", f"with the rating group; Cohen's kappa {val.get('vader_kappa', 0):.3f}", "vader_agree", "rule"),
+        ("Theme Coherence", f"{val.get('theme_coherence', 0):.3f}", "NPMI of each theme's top words", None, "hub"),
+        ("Theme Stability", f"{val.get('theme_stability', 0):.3f}", "ARI across random seeds", None, "lock"),
+        ("Negated Symptom Mentions", f"{val.get('symptom_mentions_negated', 0):.1f}%", "follow a word like \"no\"", None, "block")]),
+        unsafe_allow_html=True)
