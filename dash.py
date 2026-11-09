@@ -42,58 +42,72 @@ YEAR_PRESETS = {"All time": None, "2008 to 2012": (2008, 2012), "2013 to 2017": 
 
 
 def filters(show_years=True, show_ratings=True):
-    """Condition, Medication, Ratings and Years in the sidebar, carried across pages; active filters show as chips."""
+    """Condition, Medication, Ratings and Years in the sidebar, carried across pages; active filters show as chips.
+    Each widget is bound to its own session key (f_cond, f_med, f_ratings, f_years), and every change from outside
+    the widget (chips, reset, presets, table clicks) happens in a callback, before the widgets are drawn."""
     cube = overview_cube()
     if cube is None:
         st.error("data/overview_cube.parquet is missing. Copy it from derived/dashboard in the project Drive.")
         st.stop()
     ss = st.session_state
     nr = not_recorded()
-    conds = sorted(c for c in cube["condition_label"].unique() if c != nr) + [nr]
+    conds = ["All conditions"] + sorted(c for c in cube["condition_label"].unique() if c != nr) + [nr]
     y0, y1 = int(cube["review_year"].min()), int(cube["review_year"].max())
-    for k, v in {"f_cond": "All conditions", "f_med": "All medications", "f_years": (y0, y1), "f_ratings": []}.items():
+    defaults = {"f_cond": "All conditions", "f_med": "All medications", "f_years": (y0, y1), "f_ratings": []}
+    for k, v in defaults.items():
         ss.setdefault(k, v)
+    if ss.f_cond not in conds:
+        ss.f_cond = "All conditions"
+    pool = cube if ss.f_cond == "All conditions" else cube[cube["condition_label"] == ss.f_cond]
+    meds = ["All medications"] + sorted(pool["drugName"].unique())
+    if ss.f_med not in meds:
+        ss.f_med = "All medications"
+    ss.f_years = tuple(ss.f_years)
+
+    def clear(k):
+        ss[k] = defaults[k]
+        if k == "f_cond":
+            ss.f_med = "All medications"
 
     def reset():
-        ss.f_cond, ss.f_med, ss.f_years, ss.f_ratings = "All conditions", "All medications", (y0, y1), []
+        for k, v in defaults.items():
+            ss[k] = v
+
+    def preset():
+        v = YEAR_PRESETS.get(ss.get("f_preset"))
+        ss.f_years = v or (y0, y1)
+
+    def cond_changed():
+        ss.f_med = "All medications"
 
     with st.sidebar:
         st.markdown("<div class='side-h'>Filters</div>", unsafe_allow_html=True)
         chips = []
         if ss.f_cond != "All conditions":
-            chips.append((ss.f_cond, "f_cond", "All conditions"))
+            chips.append((ss.f_cond, "f_cond"))
         if ss.f_med != "All medications":
-            chips.append((ss.f_med, "f_med", "All medications"))
+            chips.append((ss.f_med, "f_med"))
         if ss.f_ratings and show_ratings:
-            chips.append(("rated " + ", ".join(map(str, sorted(ss.f_ratings))), "f_ratings", []))
-        if show_years and tuple(ss.f_years) != (y0, y1):
-            chips.append((f"{ss.f_years[0]} to {ss.f_years[1]}", "f_years", (y0, y1)))
+            chips.append(("rated " + ", ".join(map(str, sorted(ss.f_ratings))), "f_ratings"))
+        if show_years and ss.f_years != (y0, y1):
+            chips.append((f"{ss.f_years[0]} to {ss.f_years[1]}", "f_years"))
         if chips:
             with st.container(horizontal=True, key="ctl-chips", gap="small"):
-                for label, k, default in chips:
-                    if st.button(f"{label}  ×", key=f"chip-{k}", help="Remove this filter", type="tertiary"):
-                        ss[k] = default
-                        st.rerun()
+                for label, k in chips:
+                    st.button(f"{label}  ×", key=f"chip-{k}", help="Remove this filter", type="tertiary", on_click=clear, args=(k,))
                 st.button("Reset all", key="chip-reset", on_click=reset, type="tertiary")
-        opts = ["All conditions"] + conds
-        cond = st.selectbox("Condition", opts, index=opts.index(ss.f_cond) if ss.f_cond in opts else 0)
-        pool = cube if cond == "All conditions" else cube[cube["condition_label"] == cond]
-        mopts = ["All medications"] + sorted(pool["drugName"].unique())
-        med = st.selectbox("Medication", mopts, index=mopts.index(ss.f_med) if ss.f_med in mopts else 0)
-        ratings = ss.f_ratings if not show_ratings else st.pills("Ratings", list(range(1, 11)), selection_mode="multi", default=list(ss.f_ratings), key=f"rt-{len(ss.f_ratings)}-{sum(ss.f_ratings)}",
-                           help="Keep only reviews with these scores. Leave empty for every score.")
-        years = (y0, y1)
+        st.selectbox("Condition", conds, key="f_cond", on_change=cond_changed)
+        st.selectbox("Medication", meds, key="f_med")
+        if show_ratings:
+            st.pills("Ratings", list(range(1, 11)), selection_mode="multi", key="f_ratings",
+                     help="Keep only reviews with these scores. Leave empty for every score.")
         if show_years:
-            cur = next((k for k, v in YEAR_PRESETS.items() if (v or (y0, y1)) == tuple(ss.f_years)), None)
-            pre = st.segmented_control("Years", list(YEAR_PRESETS), default=cur, key=f"yp-{ss.f_years[0]}-{ss.f_years[1]}")
-            if pre and pre != cur:
-                ss.f_years = YEAR_PRESETS[pre] or (y0, y1)
-                st.rerun()
-            years = st.slider("Year range", y0, y1, tuple(ss.f_years), label_visibility="collapsed")
-    ss.f_cond, ss.f_med, ss.f_ratings = cond, med, sorted(ratings or [])
-    if show_years:
-        ss.f_years = years
-    return cond, med, tuple(years), tuple(ss.f_ratings)
+            ss.f_preset = next((k for k, v in YEAR_PRESETS.items() if (v or (y0, y1)) == ss.f_years), None)
+            st.segmented_control("Years", list(YEAR_PRESETS), key="f_preset", on_change=preset)
+            st.slider("Year range", y0, y1, key="f_years", label_visibility="collapsed")
+    ratings = tuple(sorted(ss.f_ratings or [])) if show_ratings else ()
+    years = tuple(ss.f_years) if show_years else (y0, y1)
+    return ss.f_cond, ss.f_med, years, ratings
 
 
 @st.cache_data(show_spinner=False)
@@ -182,8 +196,9 @@ def bars(series, fmt, lead=None, label_w=190, pct_w=74, other=None, scale=None, 
     for i, (name, v) in enumerate(series.items()):
         cls = "fill other" if name == other else ("fill lead" if name == lead else "fill")
         t = (tips or {}).get(name) or f"{name}: {fmt(v)}"
+        bg = f";background:{colour}" if colour and cls == "fill" else ""
         rows.append(f"<div class='bar{' tall' if tall else ''}' style='--lw:{label_w}px;--pw:{pct_w}px' data-tip='{esc(t)}'><span class='name'>{esc(name)}</span>"
-                    f"<div class='track'><div class='{cls}' style='width:{min(v / top, 1) * 100:.1f}%;--d:{0.15 + i * 0.04:.2f}s{f";background:{colour}" if colour and cls == "fill" else ""}'></div></div>"
+                    f"<div class='track'><div class='{cls}' style='width:{min(v / top, 1) * 100:.1f}%;--d:{0.15 + i * 0.04:.2f}s{bg}'></div></div>"
                     f"<span class='pct'>{fmt(v)}</span></div>")
     return "".join(rows)
 

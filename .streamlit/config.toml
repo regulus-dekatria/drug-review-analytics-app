@@ -8,6 +8,8 @@ font = "sans serif"
 
 [client]
 toolbarMode = "minimal"
+# Visitors see a short message instead of a Python traceback; full errors stay in the Streamlit Cloud logs.
+showErrorDetails = "none"
 
 [server]
 maxUploadSize = 5

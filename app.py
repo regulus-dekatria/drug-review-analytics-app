@@ -6,6 +6,11 @@ from core import models_ready, style
 st.set_page_config(page_title="Drug Review Analytics", page_icon=":material/medication:", layout="wide")
 style()
 
+# Keep the shared filters when moving to a page that does not draw them (Streamlit drops a widget's value otherwise).
+for _k in ("f_cond", "f_med", "f_ratings", "f_years", "f_preset"):
+    if _k in st.session_state:
+        st.session_state[_k] = st.session_state[_k]
+
 pages = {
     "Dashboard": [
         st.Page("views/overview.py", title="Overview", icon=":material/dashboard:", default=True),

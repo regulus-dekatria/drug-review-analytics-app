@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.1 (2026-11-09)
+### Security
+- Downloads from Classify a Message (test log and batch results) neutralise spreadsheet formulas: a cell starting with =, +, - or @ gets a leading apostrophe, so a pasted message such as =HYPERLINK(...) opens as text in Excel or Sheets
+- Visitors see a short error message instead of a Python traceback (`client.showErrorDetails = "none"`); full errors stay in the Streamlit Cloud logs
+### Fixed
+- Removing the condition chip did not clear the condition, because the Condition list kept its own copy of the choice; every filter is now bound to one stored value, and chips, Reset all, year presets and table clicks change it through callbacks
+- A new filter's chip appeared one click late
+- One line in dash.py used an f-string form only Python 3.12 and later accept; it now also runs on Python 3.11
+- Filters were lost after visiting a page without them (Reviews Analysis, the Predict pages); the app now keeps them across every page
+
 ## 0.5.0 (2026-11-09)
 ### Added
 - Overview: Reviews Analysis and Predictive Insights summary panels (tone of wording, wording matching the rating, most mentioned topic; actual against flagged Low, Low found in the top 20%, condition to review first), each linking to its full page

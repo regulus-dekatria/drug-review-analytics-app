@@ -9,6 +9,16 @@ from core import (DATA_DIR, GROUPS, categories, models_ready, prob_bars, served_
                   tfidf_probs, word_pushes, preprocessing)
 from dash import box, card, esc, kpis, row
 
+
+def safe_csv(df):
+    """CSV for download with spreadsheet formulas neutralised: a cell starting with = + - @ gets a leading apostrophe,
+    so a pasted message such as =HYPERLINK(...) opens as text in Excel or Sheets instead of running."""
+    out = df.copy()
+    for c in out.columns:
+        if out[c].dtype == object or pd.api.types.is_string_dtype(out[c]):
+            out[c] = out[c].map(lambda x: "'" + x if isinstance(x, str) and x[:1] in ("=", "+", "-", "@", "\t", "\r") else x)
+    return out.to_csv(index=False).encode()
+
 from dash import hero
 hero("Classify a Message")
 
@@ -87,7 +97,7 @@ with single:
                           ("You Agree With the Model", f"{df['agree'].mean() * 100:.1f}%", "of recorded messages", None, "handshake")], n=2),
                     unsafe_allow_html=True)
         st.dataframe(df[["message", "predicted", "your_call", "agree", "topics"]], hide_index=True, width="stretch")
-        st.download_button("Download test log (CSV)", df.to_csv(index=False).encode(), "soft_test_log_app.csv", "text/csv")
+        st.download_button("Download test log (CSV)", safe_csv(df), "soft_test_log_app.csv", "text/csv")
         st.caption("The log lives only in this browser session; download it before closing the page.")
 
 with batch:
@@ -115,5 +125,5 @@ with batch:
             st.markdown(kpis([(g, f"{counts[g]:,}", f"{counts[g] / len(df) * 100:.1f}% of messages", "groups", icons[g]) for g in GROUPS], n=3),
                         unsafe_allow_html=True)
             st.dataframe(df, hide_index=True, width="stretch")
-            st.download_button("Download results (CSV)", df.to_csv(index=False).encode(), "classified_messages.csv", "text/csv")
+            st.download_button("Download results (CSV)", safe_csv(df), "classified_messages.csv", "text/csv")
 
